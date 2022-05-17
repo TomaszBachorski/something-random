@@ -1,8 +1,10 @@
 <div>
     <h1>Sign up</h1>
-    <form action="" method="POST">
+    <form action="/signup#" method="POST">
         Name: <input type="text" name="name" placeholder="Enter your name">
         Surname: <input type="text" name="surname" placeholder="Enter your surname">
+        Username: <input type="text" name="username" placeholder="Enter your username">
+        Languages: <input type="text" name="languages" placeholder="Langauges you want to translate, for example EN,DE,PL ">
         Birthdate: <input type="date" name="birthdate">
         Email: <input type="email" name="email" placeholder="Enter your email">
         Password: <input type="password" name="password" placeholder="Enter your password">
@@ -10,7 +12,7 @@
         <p>
             <input type="checkbox" name="agreement"> I agree with Terms of Servive and Something other.
         </p>
-        <input type="submit" value="Log in">
+        <input type="submit" value="Register">
     </form>
     <h2>
         Have already an account? &shy; <a routerLink="/signin">Log in!</a>
