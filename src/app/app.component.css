@@ -5,8 +5,7 @@
 }
 
 div {
-    display: flex;
-    justify-content: center;
+    max-width: min(100%, 600px);
 }
 app-signin, app-signup {
     width: 90%;
