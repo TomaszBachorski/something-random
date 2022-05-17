@@ -7,6 +7,9 @@ form {
     font-size: 18px;
     align-items: center;
 }
+form > div {
+    width: 90%;
+}
 input:not([type=submit]) {
     margin-bottom: 1em;
     width: 90%;
@@ -36,4 +39,12 @@ input[type=submit]:hover {
     background-color: #888;
     color: white;
     cursor: pointer;
+}
+.warning {
+    margin: 0;
+    margin-bottom: 0.5em;
+    color: red;
+}
+.form-control.ng-touched.ng-invalid {
+    border-color: red;
 }
