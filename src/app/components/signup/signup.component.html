@@ -1,6 +1,6 @@
 <div>
     <h1>Sign up</h1>
-    <form [formGroup]="registrationForm" (ngSubmit)="validate()" (change)="log()">
+    <form [formGroup]="registrationForm" (ngSubmit)="validate()">
         <div class="form-group" [formGroup]="registrationForm">
             Name: <input formControlName="name"
                 class="form-control" type="text" name="name" placeholder="Enter your name" required >

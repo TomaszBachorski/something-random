@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from "@angular/common/http";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import User from "../../user";
 import { englishAsNative, minimumAge, passwordMatchValidator } from 'src/app/customValidators';
+import { RegisterService } from '../../services/register.service';
+
 
 @Component({
     selector: 'app-signup',
@@ -17,12 +19,16 @@ export class SignupComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private location: Location,
-        public httpClient: HttpClient
+        public httpClient: HttpClient,
+        private registerService: RegisterService
     ) { };
+
     ngOnInit(): void {
         this.registrationForm.setValidators(passwordMatchValidator);
     }
+    
     registrationForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         surname: new FormControl('', [Validators.required]),
@@ -47,6 +53,8 @@ export class SignupComponent implements OnInit {
             this.registrationForm.value.password
         );
         console.log(this.user);
+        this.registerService.register(this.user);
+        this.router.navigate(['../signin'], { relativeTo: this.route });
         return;
     }
     log() {
