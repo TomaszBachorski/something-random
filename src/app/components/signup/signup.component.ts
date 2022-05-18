@@ -4,34 +4,53 @@ import { Location } from '@angular/common';
 import { HttpClient } from "@angular/common/http";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import User from "../../user";
+import { englishAsNative, minimumAge, passwordMatchValidator } from 'src/app/customValidators';
 
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
     styleUrls: ['./signup.component.css']
 })
+
 export class SignupComponent implements OnInit {
+    private user!: User;
+
     constructor(
         private route: ActivatedRoute,
         private location: Location,
-        private httpClient: HttpClient,
-        // private user: User 
+        public httpClient: HttpClient
     ) { };
     ngOnInit(): void {
-
+        this.registrationForm.setValidators(passwordMatchValidator);
     }
     registrationForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         surname: new FormControl('', [Validators.required]),
         username: new FormControl('', [Validators.required]),
-        languages: new FormControl('', [Validators.required]),
-        birthdate: new FormControl('', [Validators.required]),
+        languages: new FormControl('', [Validators.required, englishAsNative()]),
+        birthdate: new FormControl('', [Validators.required, minimumAge()]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required]),
         repeatPassword: new FormControl('', [Validators.required]),
-        agreement: new FormControl('', [Validators.required])
-    })
-    validate() {
+        agreement: new FormControl('', [Validators.requiredTrue])
+    });
+
+    validate(): void {
+        if (!this.registrationForm.valid) return
+        this.user = new User(
+            this.registrationForm.value.name,
+            this.registrationForm.value.surname,
+            this.registrationForm.value.username,
+            this.registrationForm.value.languages,
+            this.registrationForm.value.birthdate,
+            this.registrationForm.value.email,
+            this.registrationForm.value.password
+        );
+        console.log(this.user);
+        return;
+    }
+    log() {
         console.log(this.registrationForm)
     }
 }
+
