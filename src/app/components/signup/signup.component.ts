@@ -52,13 +52,14 @@ export class SignupComponent implements OnInit {
             this.registrationForm.value.email,
             this.registrationForm.value.password
         );
-        console.log(this.user);
-        this.registerService.register(this.user);
+        this.registerService.register(this.user).subscribe((res)=>{
+            console.log(res)
+            //do something
+        }, (error) =>{
+            console.log(error)
+        });
         this.router.navigate(['../signin'], { relativeTo: this.route });
         return;
-    }
-    log() {
-        console.log(this.registrationForm)
     }
 }
 
