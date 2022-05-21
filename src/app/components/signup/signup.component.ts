@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
         username: new FormControl('', [Validators.required, this.usernameAlreadyExists()]),
         languages: new FormControl('', [Validators.required, englishAsNative()]),
         birthdate: new FormControl('', [Validators.required, minimumAge()]),
-        email: new FormControl('', [Validators.required, Validators.email]),
+        email: new FormControl('', [Validators.required, Validators.email, this.emailAlreadyExists()]),
         password: new FormControl('', [Validators.required]),
         repeatPassword: new FormControl('', [Validators.required]),
         agreement: new FormControl('', [Validators.requiredTrue])
@@ -63,8 +63,17 @@ export class SignupComponent implements OnInit {
     }
     usernameAlreadyExists(): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
-            this.httpClient.get(`http://localhost:7200/userExists/${control.value}`).subscribe(res=>{
+            this.userService.userExists(control.value).subscribe(res=>{
                 if (Object.values(res)[0]==true) control.setErrors({usernameExist: true});
+            })
+            return null;
+        }
+    }
+    emailAlreadyExists(): ValidatorFn {
+        return (control: AbstractControl): ValidationErrors | null => {
+            this.userService.emailTaken(control.value).subscribe(res=>{
+                console.log(control.value, res)
+                if (Object.values(res)[0]==true) control.setErrors({emailTaken: true});
             })
             return null;
         }

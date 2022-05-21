@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'basics-of-angular'`, () => {
+  it(`should have as title 'Translator panel'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('basics-of-angular');
+    expect(app.title).toEqual('Translator panel');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('basics-of-angular app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Translator panel app is running!');
   });
 });
