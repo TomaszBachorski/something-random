@@ -7,6 +7,6 @@
 div {
     max-width: min(100%, 600px);
 }
-app-signin, app-signup {
+app-signin, app-register {
     width: 90%;
 }

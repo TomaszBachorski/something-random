@@ -9,12 +9,12 @@ import { UserService } from '../../services/user-service.service';
 
 
 @Component({
-    selector: 'app-signup',
-    templateUrl: './signup.component.html',
-    styleUrls: ['./signup.component.css']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css']
 })
 
-export class SignupComponent implements OnInit {
+export class RegisterComponent implements OnInit {
     private user!: RegisterUser;
 
     constructor(
