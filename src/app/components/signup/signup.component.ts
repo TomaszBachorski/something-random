@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from "@angular/common/http";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import User from "../../user";
+import { RegisterUser } from "../../user";
 import { englishAsNative, minimumAge, passwordMatchValidator } from 'src/app/customValidators';
 import { UserService } from '../../services/user-service.service';
 
@@ -15,13 +15,13 @@ import { UserService } from '../../services/user-service.service';
 })
 
 export class SignupComponent implements OnInit {
-    private user!: User;
+    private user!: RegisterUser;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private location: Location,
-        public httpClient: HttpClient,
+        private httpClient: HttpClient,
         private userService: UserService
     ) { };
 
@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
 
     validate(): void {
         if (!this.registrationForm.valid) return
-        this.user = new User(
+        this.user = new RegisterUser(
             this.registrationForm.value.name,
             this.registrationForm.value.surname,
             this.registrationForm.value.username,

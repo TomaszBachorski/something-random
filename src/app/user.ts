@@ -1,4 +1,4 @@
-export default class User {
+export class RegisterUser {
     private name: string;
     private surname: string;
     private username: string;
@@ -13,6 +13,14 @@ export default class User {
         this.languages = languages.split(",");
         this.birthdate = new Date(birthdate);
         this.email = email;
+        this.password = password;
+    }
+}
+export class LoginUser {
+    private emailOrUsername: string;
+    private password: string;
+    constructor(emailOrUsername:string, password:string) {
+        this.emailOrUsername = emailOrUsername;
         this.password = password;
     }
 }
