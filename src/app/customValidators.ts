@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { UserService } from "./services/user-service.service";
 
 function englishAsNative(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -26,5 +27,21 @@ let passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationEr
     else group.get('repeatPassword')!.setErrors(null);
     return null;
 }
+function usernameAlreadyExists(userService: UserService): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        userService.userExists(control.value).subscribe((res:any)=>{
+            if (Object.values(res)[0]==true) control.setErrors({usernameExist: true});
+        })
+        return null;
+    }
+}
 
-export { englishAsNative, minimumAge, passwordMatchValidator };
+function emailAlreadyExists(userService: UserService): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        userService.emailTaken(control.value).subscribe(res=>{
+            if (Object.values(res)[0]==true) control.setErrors({emailTaken: true});
+        })
+        return null;
+    }
+}
+export { englishAsNative, minimumAge, passwordMatchValidator, usernameAlreadyExists, emailAlreadyExists };

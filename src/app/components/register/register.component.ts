@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { HttpClient } from "@angular/common/http";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { RegisterUser } from "../../user";
-import { englishAsNative, minimumAge, passwordMatchValidator } from 'src/app/customValidators';
+import { emailAlreadyExists, englishAsNative, minimumAge, passwordMatchValidator, usernameAlreadyExists } from 'src/app/customValidators';
 import { UserService } from '../../services/user-service.service';
 
 
@@ -20,8 +20,6 @@ export class RegisterComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private location: Location,
-        private httpClient: HttpClient,
         private userService: UserService
     ) { };
 
@@ -32,12 +30,12 @@ export class RegisterComponent implements OnInit {
     registrationForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         surname: new FormControl('', [Validators.required]),
-        username: new FormControl('', [Validators.required, this.usernameAlreadyExists()]),
+        username: new FormControl('', [Validators.required, usernameAlreadyExists(this.userService)]),
         languages: new FormControl('', [Validators.required, englishAsNative()]),
         birthdate: new FormControl('', [Validators.required, minimumAge()]),
-        email: new FormControl('', [Validators.required, Validators.email, this.emailAlreadyExists()]),
-        password: new FormControl('', [Validators.required]),
-        repeatPassword: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email, emailAlreadyExists(this.userService)]),
+        password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+        repeatPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
         agreement: new FormControl('', [Validators.requiredTrue])
     });
 
@@ -55,25 +53,8 @@ export class RegisterComponent implements OnInit {
         this.userService.register(this.user).subscribe((res) => {
             if (Object.values(res)[0]!=="Success") return;
             this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
-            // alert("Now you can log in!");
         }, (error) => { console.log(error) });
         return;
-    }
-    usernameAlreadyExists(): ValidatorFn {
-        return (control: AbstractControl): ValidationErrors | null => {
-            this.userService.userExists(control.value).subscribe(res=>{
-                if (Object.values(res)[0]==true) control.setErrors({usernameExist: true});
-            })
-            return null;
-        }
-    }
-    emailAlreadyExists(): ValidatorFn {
-        return (control: AbstractControl): ValidationErrors | null => {
-            this.userService.emailTaken(control.value).subscribe(res=>{
-                if (Object.values(res)[0]==true) control.setErrors({emailTaken: true});
-            })
-            return null;
-        }
     }
 }
 
