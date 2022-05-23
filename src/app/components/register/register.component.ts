@@ -53,12 +53,10 @@ export class RegisterComponent implements OnInit {
             this.registrationForm.value.password
         );
         this.userService.register(this.user).subscribe((res) => {
-            console.log(res)
-            //do something
-        }, (error) => {
-            console.log(error)
-        });
-        // this.router.navigate(['../signin'], { relativeTo: this.route });
+            if (Object.values(res)[0]!=="Success") return;
+            this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
+            // alert("Now you can log in!");
+        }, (error) => { console.log(error) });
         return;
     }
     usernameAlreadyExists(): ValidatorFn {
@@ -72,14 +70,10 @@ export class RegisterComponent implements OnInit {
     emailAlreadyExists(): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
             this.userService.emailTaken(control.value).subscribe(res=>{
-                console.log(control.value, res)
                 if (Object.values(res)[0]==true) control.setErrors({emailTaken: true});
             })
             return null;
         }
-    }
-    log(): void {
-        console.log(this.registrationForm)
     }
 }
 

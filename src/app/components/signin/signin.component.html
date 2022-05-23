@@ -1,5 +1,6 @@
 <div>
     <h1>Sign in</h1>
+    <div id="toastContainer" toastContainer></div>
     <form [formGroup]="loginForm" (ngSubmit)="validate()">
         <input formControlName="emailOrUsername"
             type="text" placeholder="Enter your email or username">

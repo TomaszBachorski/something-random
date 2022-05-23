@@ -8,6 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 
+//alerts
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +23,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ positionClass: 'inline' }),
+    ToastContainerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

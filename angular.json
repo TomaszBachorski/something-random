@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "basics-of-angular": {
+    "translator-panel": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/basics-of-angular",
+            "outputPath": "dist/translator-panel",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "basics-of-angular:build:production"
+              "browserTarget": "translator-panel:build:production"
             },
             "development": {
-              "browserTarget": "basics-of-angular:build:development"
+              "browserTarget": "translator-panel:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "basics-of-angular:build"
+            "browserTarget": "translator-panel:build"
           }
         },
         "test": {
@@ -105,5 +105,5 @@
       }
     }
   },
-  "defaultProject": "basics-of-angular"
+  "defaultProject": "translator-panel"
 }
