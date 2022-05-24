@@ -40,10 +40,20 @@ input[type=submit]:hover {
     color: white;
     cursor: pointer;
 }
-.warning {
+.error, .warning {
     margin: 0;
     margin-bottom: 0.5em;
+    width: 90%;
+    margin-left: 4%;
+    margin-right: 4%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.error {
     color: red;
+}
+.warning {
+    color: orange;
 }
 .form-control.ng-touched.ng-invalid {
     border-color: red;

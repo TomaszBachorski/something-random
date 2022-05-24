@@ -10,7 +10,7 @@ export class RegisterUser {
         this.name = name;
         this.surname = surname;
         this.username = username;
-        this.languages = languages.toLowerCase().split(",");
+        this.languages = languages.toUpperCase().split(",");
         this.birthdate = new Date(birthdate);
         this.email = email;
         this.password = password;

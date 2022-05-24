@@ -27,4 +27,8 @@ export class UserService {
     login(user: LoginUser) {
         return this.http.post(`http://localhost:7200/login`, user);
     }
+
+    getSupportedLanguages() {
+        return this.http.get("http://localhost:7200/supportedLanguages")
+    }
 }

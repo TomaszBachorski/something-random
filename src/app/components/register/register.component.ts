@@ -4,9 +4,16 @@ import { Location } from '@angular/common';
 import { HttpClient } from "@angular/common/http";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { RegisterUser } from "../../user";
-import { emailAlreadyExists, englishAsNative, minimumAge, passwordMatchValidator, usernameAlreadyExists } from 'src/app/customValidators';
+import { emailAlreadyExists, englishAsNative, minimumAge, passwordMatchValidator, supportedLanguages, unexpectedInput, usernameAlreadyExists } from 'src/app/customValidators';
 import { UserService } from '../../services/user-service.service';
 
+export class FormControlWarn extends FormControl {
+    warnings: any;
+    get warn(): boolean {
+      return this.warnings != null;
+    }
+}
+export interface AbstractControlWarn extends AbstractControl { warnings: any; }
 
 @Component({
     selector: 'app-register',
@@ -14,8 +21,13 @@ import { UserService } from '../../services/user-service.service';
     styleUrls: ['./register.component.css']
 })
 
+
 export class RegisterComponent implements OnInit {
     private user!: RegisterUser;
+
+    get languages (): FormControlWarn {
+        return <FormControlWarn>this.registrationForm.get("languages");
+    }
 
     constructor(
         private route: ActivatedRoute,
@@ -31,7 +43,7 @@ export class RegisterComponent implements OnInit {
         name: new FormControl('', [Validators.required]),
         surname: new FormControl('', [Validators.required]),
         username: new FormControl('', [Validators.required, usernameAlreadyExists(this.userService)]),
-        languages: new FormControl('', [Validators.required, englishAsNative()]),
+        languages: new FormControlWarn('', [Validators.required, englishAsNative(), unexpectedInput(), supportedLanguages(this.userService)]),
         birthdate: new FormControl('', [Validators.required, minimumAge()]),
         email: new FormControl('', [Validators.required, Validators.email, emailAlreadyExists(this.userService)]),
         password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -40,7 +52,7 @@ export class RegisterComponent implements OnInit {
     });
 
     validate(): void {
-        if (!this.registrationForm.valid) return
+        if (!this.registrationForm.valid) return;
         this.user = new RegisterUser(
             this.registrationForm.value.name,
             this.registrationForm.value.surname,
@@ -55,6 +67,9 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
         }, (error) => { console.log(error) });
         return;
+    }
+    log() {
+        console.log(this.registrationForm)
     }
 }
 
