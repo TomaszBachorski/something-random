@@ -11,12 +11,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 //alerts
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
+import { TranslationPanelComponent } from './components/translation-panel/translation-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    RegisterComponent
+    RegisterComponent,
+    TranslationPanelComponent
   ],
   imports: [
     BrowserModule,
