@@ -3,10 +3,3 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
-
-div {
-    max-width: min(100%, 500px);
-}
-app-signin, app-register {
-    width: 90%;
-}

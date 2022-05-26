@@ -12,13 +12,17 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { TranslationPanelComponent } from './components/translation-panel/translation-panel.component';
+import { FooterComponent } from './components/translation-panel/footer/footer.component';
+import { NavigationComponent } from './components/translation-panel/navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
     RegisterComponent,
-    TranslationPanelComponent
+    TranslationPanelComponent,
+    FooterComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
