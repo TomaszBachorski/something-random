@@ -4,6 +4,10 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+body {
+    margin: 0;
+}
+
 .container {
     display: flex;
     align-items: center;

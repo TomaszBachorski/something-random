@@ -1,0 +1,22 @@
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;    
+}
+
+nav {
+    width: 70%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    font-size: x-large;
+}
+nav > a {
+    cursor: pointer;
+    color: gray;
+    text-decoration: none;
+}
+nav > a:hover {
+    color: black;
+    text-shadow: 2px 2px 20px black;
+}

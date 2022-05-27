@@ -6,6 +6,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { RegisterUser } from "../../user";
 import { emailAlreadyExists, englishAsNative, minimumAge, passwordMatchValidator, supportedLanguages, unexpectedInput, usernameAlreadyExists } from 'src/app/customValidators';
 import { UserService } from '../../services/user-service.service';
+import { registerResponse } from 'src/app/customTypes';
 
 export class FormControlWarn extends FormControl {
     warnings: any;
@@ -62,7 +63,7 @@ export class RegisterComponent implements OnInit {
             this.registrationForm.value.email,
             this.registrationForm.value.password
         );
-        this.userService.register(this.user).subscribe((res) => {
+        this.userService.register(this.user).subscribe((res:registerResponse) => {
             if (Object.values(res)[0]!=="Success") return;
             this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
         }, (error) => { console.log(error) });

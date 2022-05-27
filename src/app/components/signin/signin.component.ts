@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user-service.service';
 import { LoginUser } from 'src/app/user';
 
 import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
+import { loginResponse } from 'src/app/customTypes';
 
 @Component({
     selector: 'app-signin',
@@ -17,7 +18,7 @@ export class SigninComponent implements OnInit {
     user!: LoginUser;
     @ViewChild(ToastContainerDirective, { static: true })
     toastContainer!: ToastContainerDirective;
-    
+
     constructor(
         private httpClient: HttpClient,
         private userService: UserService,
@@ -27,13 +28,14 @@ export class SigninComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        if (localStorage.getItem("username")) this.router.navigate(["/translate"]);
         this.toastrService.overlayContainer = this.toastContainer;
         this.toastrService.toastrConfig.disableTimeOut = true;
         this.toastrService.toastrConfig.tapToDismiss = false;
-        this.route.queryParams.subscribe(p=>{
+        this.route.queryParams.subscribe(p => {
             if (!p["message"]) return;
-            if (p["message"]=="Success") {
-                this.toastrService.success("You have been registered successfully and now you can log in!","Success!", {
+            if (p["message"] == "Success") {
+                this.toastrService.success("You have been registered successfully and now you can log in!", "Success!", {
                     messageClass: "message",
                     titleClass: "title"
                 });
@@ -41,14 +43,22 @@ export class SigninComponent implements OnInit {
         });
     }
     loginForm = new FormGroup({
-        emailOrUsername: new FormControl("", []),
-        password: new FormControl("", [])
+        emailOrUsername: new FormControl("", [Validators.required]),
+        password: new FormControl("", [Validators.required])
     });
 
     validate() {
+        if (!this.loginForm.valid) return;
         let user = new LoginUser(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
-        this.userService.login(user).subscribe(res=>{
+        this.userService.login(user).subscribe((res: loginResponse) => {
             console.log(res)
+            if (res.message !== "Success") {
+                //show message
+                return;
+            }
+            localStorage.setItem("username", res.username!)
+            this.router.navigate(['/translate']);
+
         });
     }
 }

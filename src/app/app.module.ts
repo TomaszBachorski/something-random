@@ -7,13 +7,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { TranslationPanelComponent } from './components/translation-panel/translation-panel.component';
+import { FooterComponent } from './components/translation-panel/footer/footer.component';
+import { NavigationComponent } from './components/translation-panel/navigation/navigation.component';
+import { LanguageOverviewPanelComponent } from './components/translation-panel/language-overview-panel/language-overview-panel.component';
 
 //alerts
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
-import { TranslationPanelComponent } from './components/translation-panel/translation-panel.component';
-import { FooterComponent } from './components/translation-panel/footer/footer.component';
-import { NavigationComponent } from './components/translation-panel/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavigationComponent } from './components/translation-panel/navigation/n
     RegisterComponent,
     TranslationPanelComponent,
     FooterComponent,
-    NavigationComponent
+    NavigationComponent,
+    LanguageOverviewPanelComponent
   ],
   imports: [
     BrowserModule,

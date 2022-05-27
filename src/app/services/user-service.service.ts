@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http"
 
 import { RegisterUser, LoginUser } from "../user";
 
+import { emailTaken, loginResponse, registerResponse, supportedLanguages, usernameExists } from "../customTypes"
+
 @Injectable({
     providedIn: 'root'
 })
@@ -13,22 +15,22 @@ export class UserService {
     ) { }
 
     userExists(username: string) {
-        return this.http.get(`http://localhost:7200/userExists/${username}`);
+        return this.http.get<usernameExists>(`http://localhost:7200/userExists/${username}`);
     }
 
     emailTaken(email: string) {
-        return this.http.get(`http://localhost:7200/emailTaken/${email}`);
+        return this.http.get<emailTaken>(`http://localhost:7200/emailTaken/${email}`);
     }
 
     register(user: RegisterUser) {
-        return this.http.post(`http://localhost:7200/register`, user);
+        return this.http.post<registerResponse>(`http://localhost:7200/register`, user);
     }
 
     login(user: LoginUser) {
-        return this.http.post(`http://localhost:7200/login`, user);
+        return this.http.post<loginResponse>(`http://localhost:7200/login`, user);
     }
 
     getSupportedLanguages() {
-        return this.http.get("http://localhost:7200/supportedLanguages")
+        return this.http.get<supportedLanguages>("http://localhost:7200/supportedLanguages")
     }
 }

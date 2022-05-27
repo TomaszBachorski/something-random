@@ -1,5 +1,6 @@
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { AbstractControlWarn, FormControlWarn } from "./components/register/register.component";
+import { emailTaken, supportedLanguages, usernameExists } from "./customTypes";
 import { UserService } from "./services/user-service.service";
 
 function fixLanguageInput(languages: string[]): string[] {
@@ -29,13 +30,12 @@ function unexpectedInput(): ValidatorFn {
 
 function supportedLanguages(userService: UserService): any {
     return (control: AbstractControlWarn): ValidationErrors | null => {
-        userService.getSupportedLanguages().subscribe((res:any)=>{
+        userService.getSupportedLanguages().subscribe((res:supportedLanguages)=>{
             if (!control.value) return null;
             let languagesInput: string[] = fixLanguageInput(control.value.toUpperCase().split(","));
             let unsupportedLanguages = new Array();
-            res = Object.values(res)[0];
             for (let i =0; i < languagesInput.length;i++) {
-                if (!res.includes(languagesInput[i])) unsupportedLanguages.push(languagesInput[i]);
+                if (!res.languages.includes(languagesInput[i])) unsupportedLanguages.push(languagesInput[i]);
             }
             control.warnings = {unsupportedLanguages: unsupportedLanguages};
             return null;
@@ -64,7 +64,7 @@ let passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationEr
 
 function usernameAlreadyExists(userService: UserService): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        userService.userExists(control.value).subscribe((res: any) => {
+        userService.userExists(control.value).subscribe((res: usernameExists) => {
             if (Object.values(res)[0] == true) control.setErrors({ usernameExist: true });
         })
         return null;
@@ -73,7 +73,7 @@ function usernameAlreadyExists(userService: UserService): ValidatorFn {
 
 function emailAlreadyExists(userService: UserService): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        userService.emailTaken(control.value).subscribe(res => {
+        userService.emailTaken(control.value).subscribe((res:emailTaken) => {
             if (Object.values(res)[0] == true) control.setErrors({ emailTaken: true });
         })
         return null;
