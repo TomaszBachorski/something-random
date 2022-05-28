@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { UserService } from 'src/app/services/user-service.service';
+import { AuthService } from 'src/app/services/auth-service.service';
+
 import { LoginUser } from 'src/app/user';
 
 import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
@@ -21,7 +22,7 @@ export class SigninComponent implements OnInit {
 
     constructor(
         private httpClient: HttpClient,
-        private userService: UserService,
+        private authService: AuthService,
         private route: ActivatedRoute,
         private router: Router,
         private toastrService: ToastrService
@@ -50,15 +51,6 @@ export class SigninComponent implements OnInit {
     validate() {
         if (!this.loginForm.valid) return;
         let user = new LoginUser(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
-        this.userService.login(user).subscribe((res: loginResponse) => {
-            console.log(res)
-            if (res.message !== "Success") {
-                //show message
-                return;
-            }
-            localStorage.setItem("username", res.username!)
-            this.router.navigate(['/translate']);
-
-        });
+        this.authService.login(user);
     }
 }

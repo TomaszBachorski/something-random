@@ -5,8 +5,8 @@ import { HttpClient } from "@angular/common/http";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { RegisterUser } from "../../user";
 import { emailAlreadyExists, englishAsNative, minimumAge, passwordMatchValidator, supportedLanguages, unexpectedInput, usernameAlreadyExists } from 'src/app/customValidators';
-import { UserService } from '../../services/user-service.service';
 import { registerResponse } from 'src/app/customTypes';
+import { AuthService } from 'src/app/services/auth-service.service';
 
 export class FormControlWarn extends FormControl {
     warnings: any;
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private userService: UserService
+        private authService: AuthService
     ) { };
 
     ngOnInit(): void {
@@ -43,10 +43,10 @@ export class RegisterComponent implements OnInit {
     registrationForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         surname: new FormControl('', [Validators.required]),
-        username: new FormControl('', [Validators.required, usernameAlreadyExists(this.userService)]),
-        languages: new FormControlWarn('', [Validators.required, englishAsNative(), unexpectedInput(), supportedLanguages(this.userService)]),
+        username: new FormControl('', [Validators.required, usernameAlreadyExists(this.authService)]),
+        languages: new FormControlWarn('', [Validators.required, englishAsNative(), unexpectedInput(), supportedLanguages(this.authService)]),
         birthdate: new FormControl('', [Validators.required, minimumAge()]),
-        email: new FormControl('', [Validators.required, Validators.email, emailAlreadyExists(this.userService)]),
+        email: new FormControl('', [Validators.required, Validators.email, emailAlreadyExists(this.authService)]),
         password: new FormControl('', [Validators.required, Validators.minLength(8)]),
         repeatPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
         agreement: new FormControl('', [Validators.requiredTrue])
@@ -63,10 +63,7 @@ export class RegisterComponent implements OnInit {
             this.registrationForm.value.email,
             this.registrationForm.value.password
         );
-        this.userService.register(this.user).subscribe((res:registerResponse) => {
-            if (Object.values(res)[0]!=="Success") return;
-            this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
-        }, (error) => { console.log(error) });
+        this.authService.register(this.user);
         return;
     }
     log() {
