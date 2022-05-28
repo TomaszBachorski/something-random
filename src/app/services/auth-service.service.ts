@@ -25,23 +25,11 @@ export class AuthService {
     }
 
     register(user: RegisterUser) {
-        return this.http.post<registerResponse>(`http://localhost:7200/register`, user).subscribe((res:registerResponse) => {
-            if (Object.values(res)[0]!=="Success") return;
-            this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
-        }, (error) => { console.log(error) });
+        return this.http.post<registerResponse>(`http://localhost:7200/register`, user);
     }
 
     login(user: LoginUser) {
-        return this.http.post<loginResponse>(`http://localhost:7200/login`, user).subscribe((res: loginResponse) => {
-            console.log(res)
-            if (res.message !== "Success") {
-                //show message
-                return;
-            }
-            localStorage.setItem("username", res.username!);
-            localStorage.setItem("loggedIn", "true");
-            this.router.navigate(['/translate']);
-        });
+        return this.http.post<loginResponse>(`http://localhost:7200/login`, user);
     }
 
     logout () {

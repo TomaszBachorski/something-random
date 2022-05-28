@@ -35,12 +35,13 @@ export class SigninComponent implements OnInit {
         this.toastrService.toastrConfig.tapToDismiss = false;
         this.route.queryParams.subscribe(p => {
             if (!p["message"]) return;
-            if (p["message"] == "Success") {
+            if (p["message"] === "Success") {
                 this.toastrService.success("You have been registered successfully and now you can log in!", "Success!", {
                     messageClass: "message",
                     titleClass: "title"
                 });
             }
+            return;
         });
     }
     loginForm = new FormGroup({
@@ -51,6 +52,18 @@ export class SigninComponent implements OnInit {
     validate() {
         if (!this.loginForm.valid) return;
         let user = new LoginUser(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
-        this.authService.login(user);
+        this.authService.login(user).subscribe((res: loginResponse) => {
+            console.log(res)
+            if (res.message !== "Success") {
+                this.toastrService.error("Invalid credentials", "Error", {
+                    messageClass: "message",
+                    titleClass: "title"
+                });
+                return;
+            }
+            localStorage.setItem("username", res.username!);
+            localStorage.setItem("loggedIn", "true");
+            this.router.navigate(['/translate']);
+        });;
     }
 }
