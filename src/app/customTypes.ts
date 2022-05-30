@@ -8,7 +8,9 @@ type emailTaken = {
 
 type loginResponse = {
     message: string,
-    username?: string
+    username?: string,
+    jwtToken?: string,
+    expiresIn?: number
 }
 
 type registerResponse = {

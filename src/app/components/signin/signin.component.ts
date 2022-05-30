@@ -33,6 +33,7 @@ export class SigninComponent implements OnInit {
         this.toastrService.overlayContainer = this.toastContainer;
         this.toastrService.toastrConfig.disableTimeOut = true;
         this.toastrService.toastrConfig.tapToDismiss = false;
+        this.toastrService.toastrConfig.preventDuplicates = true;
         this.route.queryParams.subscribe(p => {
             if (!p["message"]) return;
             if (p["message"] === "Success") {
@@ -52,18 +53,6 @@ export class SigninComponent implements OnInit {
     validate() {
         if (!this.loginForm.valid) return;
         let user = new LoginUser(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
-        this.authService.login(user).subscribe((res: loginResponse) => {
-            console.log(res)
-            if (res.message !== "Success") {
-                this.toastrService.error("Invalid credentials", "Error", {
-                    messageClass: "message",
-                    titleClass: "title"
-                });
-                return;
-            }
-            localStorage.setItem("username", res.username!);
-            localStorage.setItem("loggedIn", "true");
-            this.router.navigate(['/translate']);
-        });;
+        this.authService.login(user);
     }
 }
