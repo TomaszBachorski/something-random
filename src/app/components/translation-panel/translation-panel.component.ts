@@ -19,7 +19,7 @@ export class TranslationPanelComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        if (!localStorage.getItem("username")) this.router.navigate(["/signin"])
+        if (!localStorage.getItem("loggedIn")) this.router.navigate(["/signin"]);
     
     }
 

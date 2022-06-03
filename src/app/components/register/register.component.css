@@ -58,3 +58,6 @@ input[type=submit]:hover {
 .form-control.ng-touched.ng-invalid {
     border-color: red;
 }
+:host {
+    width: max(40%, 400px)
+}

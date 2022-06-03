@@ -29,7 +29,7 @@ export class SigninComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        if (localStorage.getItem("username")) this.router.navigate(["/translate"]);
+        if (localStorage.getItem("loggedIn")) this.router.navigate(["/translate"]);
         this.toastrService.overlayContainer = this.toastContainer;
         this.toastrService.toastrConfig.disableTimeOut = true;
         this.toastrService.toastrConfig.tapToDismiss = false;

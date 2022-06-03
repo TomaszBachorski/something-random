@@ -17,27 +17,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SigninComponent,
-    RegisterComponent,
-    TranslationPanelComponent,
-    FooterComponent,
-    NavigationComponent,
-    LanguageOverviewPanelComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({ positionClass: 'inline' }),
-    ToastContainerModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        SigninComponent,
+        RegisterComponent,
+        TranslationPanelComponent,
+        FooterComponent,
+        NavigationComponent,
+        LanguageOverviewPanelComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({ positionClass: 'inline' }),
+        ToastContainerModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

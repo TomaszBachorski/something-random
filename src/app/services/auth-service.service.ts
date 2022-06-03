@@ -48,7 +48,6 @@ export class AuthService {
                 return;
             }
             this.setSession(res);
-            this.localStorage.set("username", res.username!);
             this.localStorage.set("loggedIn", "true");
             this.router.navigate(['/translate']);
         });
