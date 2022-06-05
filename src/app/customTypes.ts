@@ -33,4 +33,12 @@ type jwtToken = {
     birthdate: Date
 }
 
-export {loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken}
+type languageInfoResponse = {
+    translatedStrings: number;
+    availableStrings: number;
+    approved: number;
+    numberOfContributors: number;
+
+}
+
+export {loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse}

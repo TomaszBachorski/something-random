@@ -1,8 +1,8 @@
 <div>
     <img src="assets/flags/{{ language.toLowerCase() }}.png" alt="flag">
     <p>{{ language }}</p>
-    <p>translated/all</p>
-    <p>% of approved</p>
-    <p>number of contributors/list</p>
+    <p>{{ translatedStrings }}/{{ availableStrings }}</p>
+    <p>{{ (approved/availableStrings*100).toFixed(2) }}% Approved</p>
+    <p>{{ numberOfContributors }} contributors</p>
     <button>Translate</button>
 </div>

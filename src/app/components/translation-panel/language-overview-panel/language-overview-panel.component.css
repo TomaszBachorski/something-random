@@ -1,6 +1,7 @@
 div {
     margin-top: 50px;
     margin-bottom: 50px;
+    padding: 50px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -8,12 +9,13 @@ div {
     text-align: center;
     font-size: 18px;
     border-radius: 1em;
-    border: 3px dashed #333;
-    background-color: #bbb;
+    border: 3px solid #333;
+    background-color: #ddd;
 }
 img {
     width: 30%;
     margin: 1.5rem;
+    border: 1px solid black;
 }
 p {
     width: 90%;
@@ -28,15 +30,19 @@ p:last-of-type {
     margin-bottom: 1em;
 }
 button {
-    width: 40%;
-    background-color: palevioletred;
+    width: 70%;
+    background-color: darkgray;
     font-weight: bold;
     color: white;
     padding: 10px;
+    border: 3px solid black;
     border-radius: 2em;
     font-size: 20px;
     margin-bottom: 1em;
 }
 button:hover {
     cursor: pointer;
+    background-color: #333;
+    color: white;
+    border: 3px solid black;
 }

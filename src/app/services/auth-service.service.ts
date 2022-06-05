@@ -20,15 +20,15 @@ export class AuthService {
     ) { }
 
     userExists(username: string) {
-        return this.http.post<usernameExists>(`http://localhost:7200/userExists/`, { username: username });
+        return this.http.post<usernameExists>("http://localhost:7200/userExists/", { username: username });
     }
 
     emailTaken(email: string) {
-        return this.http.post<emailTaken>(`http://localhost:7200/emailTaken/`, { email: email });
+        return this.http.post<emailTaken>("http://localhost:7200/emailTaken/", { email: email });
     }
 
     register(user: RegisterUser) {
-        return this.http.post<registerResponse>(`http://localhost:7200/register`, user);
+        return this.http.post<registerResponse>("http://localhost:7200/register", user);
     }
     private setSession(authResult: loginResponse) {
         const expiresAt = moment().add(authResult.expiresIn, 'second');
@@ -36,7 +36,7 @@ export class AuthService {
         this.localStorage.set("expiresAt", JSON.stringify(expiresAt.valueOf()));
     }
     login(user: LoginUser) {
-        return this.http.post<loginResponse>(`http://localhost:7200/login`, user).subscribe((res: loginResponse) => {
+        return this.http.post<loginResponse>("http://localhost:7200/login", user).subscribe((res: loginResponse) => {
             if (res.message !== "Success") {
                 this.toastrService.error("Invalid credentials", "Error", {
                     messageClass: "message",
