@@ -1,0 +1,42 @@
+div {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 1em;
+    border: 3px dashed #333;
+    background-color: #bbb;
+}
+img {
+    width: 30%;
+    margin: 1.5rem;
+}
+p {
+    width: 90%;
+    margin: 0.3rem;
+}
+p:first-of-type {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 0.3em;
+}
+p:last-of-type {
+    margin-bottom: 1em;
+}
+button {
+    width: 40%;
+    background-color: palevioletred;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+    border-radius: 2em;
+    font-size: 20px;
+    margin-bottom: 1em;
+}
+button:hover {
+    cursor: pointer;
+}

@@ -13,6 +13,7 @@ import { jwtToken } from 'src/app/customTypes';
     styleUrls: ['./translation-panel.component.css']
 })
 export class TranslationPanelComponent implements OnInit {
+    public userLanguages!: string[];
 
     constructor(
         private httpClient: HttpClient,
@@ -28,6 +29,7 @@ export class TranslationPanelComponent implements OnInit {
             return;
         }
         this.authService.authenticate(this.localStorage.get("jwtToken")!);
-        // let decodedToken: jwtToken = jwt_decode(this.localStorage.get("jwtToken")!);
+        let decodedToken: jwtToken = jwt_decode(this.localStorage.get("jwtToken")!);
+        this.userLanguages = decodedToken.languages;
     }
 }

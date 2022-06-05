@@ -1,7 +1,5 @@
 <app-navigation></app-navigation>
-<div>
-    <div class="box" *ngFor="">
-        
-    </div>
+<div id="languagesContainer">
+    <language-box class="languageBox" *ngFor="let language of userLanguages" [language]="language"></language-box>
 </div>
 <app-footer></app-footer>

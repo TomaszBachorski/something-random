@@ -1,5 +1,21 @@
 :host {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
+#languagesContainer {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
 
+.languageBox {
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -27,7 +27,7 @@ type authenticateResponse = {
 
 type jwtToken = {
     username: string,
-    languages: string,
+    languages: string[],
     rankId: number,
     blocked: number,
     birthdate: Date

@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { HttpClient } from "@angular/common/http";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { RegisterUser } from "../../user";
-import { emailAlreadyExists, englishAsNative, minimumAge, passwordMatchValidator, supportedLanguages, unexpectedInput, usernameAlreadyExists } from 'src/app/customValidators';
+import { emailAlreadyExists, englishAsNative, maxNumberOfLanguages, minimumAge, passwordMatchValidator, supportedLanguages, unexpectedInput, usernameAlreadyExists } from 'src/app/customValidators';
 import { registerResponse } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
 
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
         name: new FormControl('', [Validators.required]),
         surname: new FormControl('', [Validators.required]),
         username: new FormControl('', [Validators.required, usernameAlreadyExists(this.authService)]),
-        languages: new FormControlWarn('', [Validators.required, englishAsNative(), unexpectedInput(), supportedLanguages(this.authService)]),
+        languages: new FormControlWarn('', [Validators.required, englishAsNative(), unexpectedInput(), supportedLanguages(this.authService), maxNumberOfLanguages()]),
         birthdate: new FormControl('', [Validators.required, minimumAge()]),
         email: new FormControl('', [Validators.required, Validators.email, emailAlreadyExists(this.authService)]),
         password: new FormControl('', [Validators.required, Validators.minLength(8)]),
