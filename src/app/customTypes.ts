@@ -38,7 +38,10 @@ type languageInfoResponse = {
     availableStrings: number;
     approved: number;
     numberOfContributors: number;
-
 }
 
-export {loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse}
+type onlyJwtTokenInJson = {
+    jwtToken: string
+}
+
+export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson }

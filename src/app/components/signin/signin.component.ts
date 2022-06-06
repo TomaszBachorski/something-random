@@ -9,6 +9,7 @@ import { LoginUser } from 'src/app/user';
 
 import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
 import { loginResponse } from 'src/app/customTypes';
+import { TitleService } from 'src/app/services/title-service.service';
 
 @Component({
     selector: 'app-signin',
@@ -25,11 +26,13 @@ export class SigninComponent implements OnInit {
         private authService: AuthService,
         private route: ActivatedRoute,
         private router: Router,
-        private toastrService: ToastrService
+        private toastrService: ToastrService,
+        private titleService: TitleService
     ) { }
 
     ngOnInit(): void {
         if (localStorage.getItem("loggedIn")) this.router.navigate(["/translate"]);
+        this.titleService.setTitle("Sign In");
         this.toastrService.overlayContainer = this.toastContainer;
         this.toastrService.toastrConfig.disableTimeOut = true;
         this.toastrService.toastrConfig.tapToDismiss = false;

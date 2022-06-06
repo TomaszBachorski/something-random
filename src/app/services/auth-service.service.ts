@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { emailTaken, loginResponse, registerResponse, supportedLanguages, usernameExists, authenticateResponse } from '../customTypes';
+import { emailTaken, loginResponse, registerResponse, supportedLanguages, usernameExists, authenticateResponse, jwtToken, onlyJwtTokenInJson } from '../customTypes';
 import { LoginUser, RegisterUser } from '../user';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -72,5 +72,9 @@ export class AuthService {
             this.localStorage.removeAll();
             this.router.navigate(["/signin"])
         });
+    }
+
+    refreshUserInformation(jwtToken: string, expiresAt: string) {
+        return this.http.post<onlyJwtTokenInJson>("http://localhost:7200/refreshUserInformation", {jwtToken: jwtToken, expiresAt: expiresAt});
     }
 }

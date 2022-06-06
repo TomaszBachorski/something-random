@@ -7,6 +7,7 @@ import { RegisterUser } from "../../user";
 import { emailAlreadyExists, englishAsNative, maxNumberOfLanguages, minimumAge, passwordMatchValidator, supportedLanguages, unexpectedInput, usernameAlreadyExists } from 'src/app/customValidators';
 import { registerResponse } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
+import { TitleService } from 'src/app/services/title-service.service';
 
 export class FormControlWarn extends FormControl {
     warnings: any;
@@ -33,11 +34,13 @@ export class RegisterComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private titleService: TitleService
     ) { };
 
     ngOnInit(): void {
         this.registrationForm.setValidators(passwordMatchValidator);
+        this.titleService.setTitle("Register");
     }
 
     registrationForm = new FormGroup({
