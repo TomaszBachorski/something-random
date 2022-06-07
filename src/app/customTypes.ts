@@ -44,4 +44,10 @@ type onlyJwtTokenInJson = {
     jwtToken: string
 }
 
-export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson }
+type usersList = Array<{
+    username: string,
+    rankId: number,
+    languages: string
+}>
+
+export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson , usersList}

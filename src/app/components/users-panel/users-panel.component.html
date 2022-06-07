@@ -1,0 +1,14 @@
+<app-navigation></app-navigation>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Rank</th>
+            <th>Languages</th>
+        </tr>
+        <tr *ngFor="let user of users">
+            <td>{{user.username}}</td>
+            <td>{{user.rankId}}</td>
+            <td>{{user.languages}}</td>
+        </tr>
+    </table>
+<app-footer></app-footer>
