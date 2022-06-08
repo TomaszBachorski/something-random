@@ -1,3 +1,39 @@
 :host {
     width: 100%;
 }
+div {
+    margin: 5%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+th {
+    background-color: gray;
+    color: white;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+tr {
+    height: 40px;
+}
+td {
+    height: 34px; /* 3px's from padding times two */
+    padding: 3px 10px;
+}
+td:nth-of-type(3) {
+    display: flex;
+    align-items: center;
+}
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+tr:nth-of-type(2n+1) {
+    background-color: #ccc;
+}
+.flag {
+    margin: 0 2px;
+    height: 20px;
+    border: 1px solid black;
+}

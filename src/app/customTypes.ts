@@ -50,4 +50,12 @@ type usersList = Array<{
     languages: string
 }>
 
-export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson , usersList}
+enum rolesEnum {
+    "Translator" = 1,
+    "Proofreader",
+    "Administrator"
+}
+
+
+export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList }
+export { rolesEnum }

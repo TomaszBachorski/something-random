@@ -1,14 +1,27 @@
 <app-navigation></app-navigation>
-    <table>
-        <tr>
-            <th>User</th>
-            <th>Rank</th>
-            <th>Languages</th>
-        </tr>
-        <tr *ngFor="let user of users">
-            <td>{{user.username}}</td>
-            <td>{{user.rankId}}</td>
-            <td>{{user.languages}}</td>
-        </tr>
-    </table>
+    <div>
+        <table>
+            <tr>
+                <th>🧑 User</th>
+                <th>🗣 Rank</th>
+                <th>🚩 Languages</th>
+            </tr>
+            <tr *ngFor="let user of users">
+                <td>{{user.username}}</td>
+                <td>
+                    {{ ranks[user.rankId]}}
+                </td>
+                <td>
+                    <a *ngFor="let language of user.languages.split(',')" 
+                        routerLink="/users" 
+                        [queryParams]="{language: language}"
+                    >
+                        <img src="assets/flags/{{ language.toLowerCase() }}.png" 
+                            onerror="this.src=`assets/flags/404.png`"
+                            class="flag">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 <app-footer></app-footer>

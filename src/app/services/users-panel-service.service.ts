@@ -11,7 +11,7 @@ export class UsersPanelService {
         private http: HttpClient
     ) { }
 
-    getUsers() {
-        return this.http.get<usersList>("http://localhost:7200/getUsers");
+    getUsers(language?: string) {
+        return this.http.post<usersList>("http://localhost:7200/getUsers", {language: language});
     }
 }
