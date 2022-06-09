@@ -23,17 +23,19 @@ td {
 td:nth-of-type(3) {
     display: flex;
     align-items: center;
+    width: auto;
 }
 a {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 40px;
 }
 tr:nth-of-type(2n+1) {
     background-color: #ccc;
 }
 .flag {
-    margin: 0 2px;
+    width: 34px;
     height: 20px;
-    border: 1px solid black;
+    vertical-align: middle;
 }

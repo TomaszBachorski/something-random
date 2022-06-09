@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { rolesEnum, usersList } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { TitleService } from 'src/app/services/title-service.service';
 import { UsersPanelService } from 'src/app/services/users-panel-service.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class UsersPanelComponent implements OnInit {
         private usersService: UsersPanelService,
         private localStorage: LocalStorageService,
         private route: ActivatedRoute,
+        private titleService: TitleService
     ) { }
 
     ngOnInit(): void {
@@ -30,11 +32,13 @@ export class UsersPanelComponent implements OnInit {
         });
         this.route.queryParams.subscribe(params=>{
             if (!params["language"]) {
+                this.titleService.setTitle("Users")
                 this.usersService.getUsers().subscribe((res:usersList)=>{
                     this.users = res;
                 });
                 return;
             }
+            this.titleService.setTitle(`${params["language"]} users`)
             this.usersService.getUsers(params["language"]).subscribe((res:usersList)=>{
                 this.users = res;
             });

@@ -51,6 +51,7 @@ type usersList = Array<{
 }>
 
 enum rolesEnum {
+    "Blocked" = 0,
     "Translator" = 1,
     "Proofreader",
     "Administrator"
