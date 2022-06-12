@@ -2,23 +2,23 @@
     <h1>Register</h1>
     <form [formGroup]="registrationForm" (ngSubmit)="validate()" (change)="log()">
         <div class="form-group" [formGroup]="registrationForm">
-            Name: <input formControlName="name"
+            <h3>Name:</h3> <input formControlName="name"
                 class="form-control" type="text" name="name" placeholder="Enter your name" required >
             <p class="error" *ngIf="registrationForm.controls['name'].touched && !registrationForm.controls['name'].valid">Name cant be empty</p>
         </div>
         <div class="form-group" [formGroup]="registrationForm">
-            Surname: <input formControlName="surname"
+            <h3>Surname:</h3> <input formControlName="surname"
                 class="form-control" type="text" name="surname" placeholder="Enter your surname" required>
             <p class="error" *ngIf="registrationForm.controls['surname'].touched && !registrationForm.controls['surname'].valid">Surname cant be empty</p>
         </div>
         <div class="form-group" [formGroup]="registrationForm">
-            Username: <input formControlName="username"
+            <h3>Username:</h3> <input formControlName="username"
                 class="form-control" type="text" name="username" placeholder="Enter your username" required>
             <p class="error" *ngIf="registrationForm.controls['username'].touched && !registrationForm.controls['username'].value">Username cant be empty</p>
             <p class="error" *ngIf="registrationForm.controls['username'].touched && registrationForm.controls['username'].errors?.['usernameExist']===true">Username is already taken</p>
         </div>
         <div class="form-group" [formGroup]="registrationForm">
-            Languages: <input formControlName="languages"
+            <h3>Languages:</h3> <input formControlName="languages"
                 class="form-control" type="text" name="languages" placeholder="Langauges you want to translate, for example EN,DE,PL " required>
             <p class="error" *ngIf="languages.touched && !languages.value">Languages cant be empty</p>
             <p class="error" *ngIf="languages.touched && languages.errors?.['englishAsNative']===false">You must be fluent in english</p>
@@ -27,26 +27,26 @@
             <p class="warning" *ngIf="languages.touched && !languages.errors && languages.warnings?.unsupportedLanguages.length>=1">There are unsupported languages in your list: {{ languages.warnings?.unsupportedLanguages.join(", ") }}. You may continue even if they aren't supported</p>
         </div>
         <div class="form-group" [formGroup]="registrationForm">
-            Birthdate: <input formControlName="birthdate"
+            <h3>Birthdate:</h3> <input formControlName="birthdate"
                 class="form-control" type="date" name="birthdate" required>
             <p class="error" *ngIf="registrationForm.controls['birthdate'].touched && !registrationForm.controls['birthdate'].value">Birthdate cant be empty</p>
             <p class="error" *ngIf="registrationForm.controls['birthdate'].touched && registrationForm.controls['birthdate'].errors?.['minimumAge']===false">You must be 16 years old</p>
         </div>
         <div class="form-group" [formGroup]="registrationForm">
-            Email: <input formControlName="email"
+            <h3>Email:</h3> <input formControlName="email"
                 class="form-control" type="email" name="email" placeholder="Enter your email" required>
             <p class="error" *ngIf="registrationForm.controls['email'].touched && !registrationForm.controls['email'].value">Email cant be empty</p>
             <p class="error" *ngIf="registrationForm.controls['email'].touched && registrationForm.controls['email'].errors?.['email']===true">Given email has invalid format</p>
             <p class="error" *ngIf="registrationForm.controls['email'].touched && registrationForm.controls['email'].errors?.['emailTaken']===true">Email is already registerd!</p>
         </div>
         <div class="form-group" [formGroup]="registrationForm">
-            Password: <input formControlName="password"
+            <h3>Password:</h3> <input formControlName="password"
                 class="form-control" type="password" name="password" placeholder="Enter your password" required>
             <p class="error" *ngIf="registrationForm.controls['password'].touched && !registrationForm.controls['password'].value">Password cant be empty</p>
             <p class="error" *ngIf="registrationForm.controls['password'].touched && !registrationForm.controls['password'].valid">Password must be 8 letters long</p>
         </div>
         <div class="form-group" [formGroup]="registrationForm">
-            Repeat password: <input formControlName="repeatPassword"
+            <h3>Repeat password:</h3> <input formControlName="repeatPassword"
                 class="form-control" type="password" name="repeatPassword" placeholder="Repeat your password" required>
             <p class="error" *ngIf="registrationForm.controls['repeatPassword'].touched && !registrationForm.controls['repeatPassword'].value">You have to repeat a password</p>
             <p class="error" *ngIf="registrationForm.controls['repeatPassword'].touched && !registrationForm.controls['repeatPassword'].valid">Passwords aren't the same</p>
