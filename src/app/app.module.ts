@@ -16,6 +16,7 @@ import { LanguageOverviewPanelComponent } from './components/translation-panel/l
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { UsersPanelComponent } from './components/users-panel/users-panel.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { UsersPanelComponent } from './components/users-panel/users-panel.compon
         FooterComponent,
         NavigationComponent,
         LanguageOverviewPanelComponent,
-        UsersPanelComponent
+        UsersPanelComponent,
+        AccountComponent
     ],
     imports: [
         BrowserModule,

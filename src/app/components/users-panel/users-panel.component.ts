@@ -21,11 +21,16 @@ export class UsersPanelComponent implements OnInit {
         private usersService: UsersPanelService,
         private localStorage: LocalStorageService,
         private route: ActivatedRoute,
+        private router: Router,
         private titleService: TitleService
     ) { }
 
     ngOnInit(): void {
-        
+        if (!this.localStorage.get("loggedIn") || !this.localStorage.get("jwtToken")) {
+            this.router.navigate(["/signin"]);
+            this.localStorage.removeAll();
+            return;
+        }
         this.authService.authenticate(this.localStorage.get("jwtToken")!);
         this.usersService.getUsers().subscribe((res:usersList)=>{
             this.users = res;
