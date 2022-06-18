@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { languageInfoResponse, supportedLanguages } from 'src/app/customTypes';
+import { extendedLanguageResponse, languageInfoResponse, supportedLanguages } from 'src/app/customTypes';
 import { TranslateService } from 'src/app/services/translate-service.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class LanguageOverviewPanelComponent implements OnInit {
     public availableStrings: number = 0;
     public approved: number = 0;
     public numberOfContributors: number = 0;
+    public languageName: string = "";
 
     constructor(
         private translateService: TranslateService
@@ -27,6 +28,10 @@ export class LanguageOverviewPanelComponent implements OnInit {
                 this.availableStrings = res.availableStrings;
                 this.approved = res.approved;
                 this.numberOfContributors = res.numberOfContributors;
+            });
+            this.translateService.getLanguageExtended(this.language).subscribe((res: extendedLanguageResponse)=>{
+                console.log(res);
+                this.languageName = res.language;
             });
         });
     }

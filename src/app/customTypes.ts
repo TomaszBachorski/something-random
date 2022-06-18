@@ -34,10 +34,15 @@ type jwtToken = {
 }
 
 type languageInfoResponse = {
-    translatedStrings: number;
-    availableStrings: number;
-    approved: number;
-    numberOfContributors: number;
+    translatedStrings: number,
+    availableStrings: number,
+    approved: number,
+    numberOfContributors: number
+}
+
+type extendedLanguageResponse = {
+    id: string,
+    language: string,
 }
 
 type onlyJwtTokenInJson = {
@@ -58,5 +63,5 @@ enum rolesEnum {
 }
 
 
-export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList }
+export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse }
 export { rolesEnum }
