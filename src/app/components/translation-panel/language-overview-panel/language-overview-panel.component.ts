@@ -30,7 +30,6 @@ export class LanguageOverviewPanelComponent implements OnInit {
                 this.numberOfContributors = res.numberOfContributors;
             });
             this.translateService.getLanguageExtended(this.language).subscribe((res: extendedLanguageResponse)=>{
-                console.log(res);
                 this.languageName = res.language;
             });
         });

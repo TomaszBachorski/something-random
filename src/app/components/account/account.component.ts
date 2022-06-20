@@ -32,7 +32,6 @@ export class AccountComponent implements OnInit {
         this.authService.authenticate(this.localStorage.get("jwtToken")!);
         this.titleService.setTitle("Account");
         this.user = jwt_decode(this.localStorage.get("jwtToken")!);
-        
     }
 
 }

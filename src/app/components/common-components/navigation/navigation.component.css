@@ -10,6 +10,7 @@ nav {
     display: flex;
     justify-content: space-around;
     font-size: x-large;
+    flex-wrap: wrap;
 }
 nav > a {
     cursor: pointer;
