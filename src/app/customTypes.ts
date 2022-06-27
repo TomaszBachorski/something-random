@@ -62,6 +62,19 @@ enum rolesEnum {
     "Administrator"
 }
 
+type fullUserInformation = {
+    id: number,
+    username: string,
+    name: string,
+    surname: string,
+    creationDate: string,
+    email: string,
+    birthdate: string,
+    blocked: boolean,
+    rankId: number,
+    languages: string[]
 
-export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse }
+}
+
+export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse, fullUserInformation }
 export { rolesEnum }

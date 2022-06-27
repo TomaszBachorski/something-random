@@ -1,6 +1,20 @@
 <app-navigation></app-navigation>
 <div id="content">
-{{ user.username }}
+    <div id="userInf">
+        Username: <input type="text" [disabled]="true" [value]="user?.username"> <br>
+        Birthdate: <input type="date" [disabled]="true" [value]="user && user.birthdate!=undefined ? user.birthdate.split('T')[0] : null"><br>
+        Rank: {{ user && user.rankId ? rolesEnum[user.rankId] : null}}<br>
+        <form (ngSubmit)="saveLanguages()" [formGroup]="changeLanguageForm">
+            Languages: <input  formControlName="languages" type="text">
+            <input type="submit" value="Change">
+        </form>
+
+
+    </div>
+    <div id="statistics">
+
+
+    </div>
 </div>
 <app-footer></app-footer>
 

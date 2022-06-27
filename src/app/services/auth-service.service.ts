@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { emailTaken, loginResponse, registerResponse, supportedLanguages, usernameExists, authenticateResponse, jwtToken, onlyJwtTokenInJson } from '../customTypes';
+import { emailTaken, loginResponse, registerResponse, supportedLanguages, usernameExists, authenticateResponse, jwtToken, onlyJwtTokenInJson, fullUserInformation } from '../customTypes';
 import { LoginUser, RegisterUser } from '../user';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -30,6 +30,7 @@ export class AuthService {
     register(user: RegisterUser) {
         return this.http.post<registerResponse>("http://localhost:7200/register", user);
     }
+
     private setSession(authResult: loginResponse) {
         const expiresAt = moment().add(authResult.expiresIn, 'second');
         this.localStorage.set('jwtToken', authResult.jwtToken!);
@@ -76,5 +77,9 @@ export class AuthService {
 
     refreshUserInformation(jwtToken: string, expiresAt: string) {
         return this.http.post<onlyJwtTokenInJson>("http://localhost:7200/refreshUserInformation", {jwtToken: jwtToken, expiresAt: expiresAt});
+    }
+
+    getFullUserInformation(username: string) {
+        return this.http.post<fullUserInformation>("http://localhost:7200/getFullUserInformation", {username: username})
     }
 }
