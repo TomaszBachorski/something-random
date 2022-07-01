@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { Router } from '@angular/router';
 import { TitleService } from 'src/app/services/title-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControlWarn } from '../register/register.component';
+import { englishAsNative, maxNumberOfLanguages, supportedLanguages, unexpectedInput } from 'src/app/customValidators';
 
 @Component({
     selector: 'app-account',
@@ -38,18 +40,22 @@ export class AccountComponent implements OnInit {
         this.authService.getFullUserInformation(tempUser.username).subscribe((res:fullUserInformation)=>{
             this.user = res;
             //set current languages in FormControl
-            this.changeLanguageForm.controls["languages"].setValue(this.user.languages);
+            this.changeLanguageForm.controls["languages"].setValue(this.user.languages.join(","));
         });
         //set title for this page
         this.titleService.setTitle("Account");
     }
     
     changeLanguageForm = new FormGroup({
-        languages: new FormControl("", [Validators.required])
+        languages: new FormControlWarn("", [Validators.required, englishAsNative(), unexpectedInput(), supportedLanguages(this.authService), maxNumberOfLanguages()])
     })
-    
+
+    get languages (): FormControlWarn {
+        return <FormControlWarn>this.changeLanguageForm.get("languages");
+    }
+
     saveLanguages() {
-        console.log(this.changeLanguageForm)
+        if (!this.changeLanguageForm.valid) return;
     }
 
 }

@@ -1,5 +1,5 @@
-import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { AbstractControlWarn, FormControlWarn } from "./components/register/register.component";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractControlWarn } from "./components/register/register.component";
 import { emailTaken, supportedLanguages, usernameExists } from "./customTypes";
 import { AuthService } from "./services/auth-service.service";
 
@@ -14,6 +14,7 @@ function englishAsNative(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const languages: string = control.value;
         if (!languages) return null;
+        // let fixed = fixLanguageInput(languages);
         let valid: boolean = languages.toUpperCase().includes("EN");
         return valid ? null : { englishAsNative: false };
     }

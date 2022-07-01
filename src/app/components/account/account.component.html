@@ -1,15 +1,24 @@
 <app-navigation></app-navigation>
 <div id="content">
     <div id="userInf">
-        Username: <input type="text" [disabled]="true" [value]="user?.username"> <br>
-        Birthdate: <input type="date" [disabled]="true" [value]="user && user.birthdate!=undefined ? user.birthdate.split('T')[0] : null"><br>
-        Rank: {{ user && user.rankId ? rolesEnum[user.rankId] : null}}<br>
-        <form (ngSubmit)="saveLanguages()" [formGroup]="changeLanguageForm">
-            Languages: <input  formControlName="languages" type="text">
-            <input type="submit" value="Change">
-        </form>
-
-
+        <div id="avatar">
+            <img src="" alt="avatar">
+        </div>
+        <div id="personalInformation">
+            Username: <input type="text" [disabled]="true" [value]="user?.username"> <br>
+            Birthdate: <input type="date" [disabled]="true" [value]="user && user.birthdate!=undefined ? user.birthdate.split('T')[0] : null"><br>
+            Rank: {{ user && user.rankId ? rolesEnum[user.rankId] : null}}<br>
+            <form (ngSubmit)="saveLanguages()" [formGroup]="changeLanguageForm">
+                Languages: <input formControlName="languages" type="text" required>
+                <input type="submit" value="Change">
+                <p class="error" *ngIf="languages.touched && !languages.value">Languages cant be empty</p>
+                <p class="error" *ngIf="languages.touched && languages.errors?.['englishAsNative']===false">You must be fluent in english</p>
+                <p class="error" *ngIf="languages.touched && languages.errors?.['unexpectedInput']===true">Languages are 2 or 3 characters long</p>
+                <p class="error" *ngIf="languages.touched && languages.errors?.['tooManyLanguages']===true">You can't enter more than 5 languages, if you speak more than this then register and contact our support!</p>
+                <p class="error" *ngIf="languages.touched && user && languages.value.split(',').sort().join(',')===user.languages.sort().join(',')">You cant change languages to the same</p>
+                <p class="warning" *ngIf="languages.touched && !languages.errors && languages.warnings?.unsupportedLanguages.length>=1">There are unsupported languages in your list: {{ languages.warnings?.unsupportedLanguages.join(", ") }}. You may continue even if they aren't supported</p>
+            </form>
+        </div>
     </div>
     <div id="statistics">
 
