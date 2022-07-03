@@ -5,9 +5,9 @@
             <img src="" alt="avatar">
         </div>
         <div id="personalInformation">
-            Username: <input type="text" [disabled]="true" [value]="user?.username"> <br>
-            Birthdate: <input type="date" [disabled]="true" [value]="user && user.birthdate!=undefined ? user.birthdate.split('T')[0] : null"><br>
-            Rank: {{ user && user.rankId ? rolesEnum[user.rankId] : null}}<br>
+            <p>Username: <input type="text" [disabled]="true" [value]="user?.username"></p>
+            <p>Birthdate: <input type="date" [disabled]="true" [value]="user && user.birthdate!=undefined ? user.birthdate.split('T')[0] : null"></p>
+            <p>Rank: {{ user && user.rankId ? rolesEnum[user.rankId] : null}}</p>
             <form (ngSubmit)="saveLanguages()" [formGroup]="changeLanguageForm">
                 Languages: <input formControlName="languages" type="text" required>
                 <input type="submit" value="Change">

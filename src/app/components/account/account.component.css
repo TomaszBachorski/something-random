@@ -38,3 +38,26 @@
     margin: 5%;
     width: calc(80% - 240px - 3px); /* 100% - 20% margin - 240px avatar width - 3px avatar border */
 }
+p {
+    margin-top: 0.2em;
+    width: 100%;
+    vertical-align: middle;
+}
+
+form > p {
+    margin: 0.5em 0;
+}
+
+#personalInformation > p {
+    margin: 0;
+    height: 30px;
+    display: inline-block;
+}
+
+input {
+    margin: 0 .4em;
+}
+
+input:disabled:hover {
+    cursor: not-allowed;
+}
