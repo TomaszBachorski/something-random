@@ -1,11 +1,14 @@
 <app-navigation></app-navigation>
 <div id="content">
     <div id="userInf">
+        <h1>Account Information</h1>
         <div id="avatar">
             <img src="" alt="avatar">
         </div>
         <div id="personalInformation">
+            <p>Name: {{ user?.name }} {{ user?.surname }}</p>
             <p>Username: <input type="text" [disabled]="true" [value]="user?.username"></p>
+            <p>Email: {{ user?.email }}</p>
             <p>Birthdate: <input type="date" [disabled]="true" [value]="user && user.birthdate!=undefined ? user.birthdate.split('T')[0] : null"></p>
             <p>Rank: {{ user && user.rankId ? rolesEnum[user.rankId] : null}}</p>
             <form (ngSubmit)="saveLanguages()" [formGroup]="changeLanguageForm">
@@ -21,7 +24,7 @@
         </div>
     </div>
     <div id="statistics">
-
+        <h1>Your Statistics</h1>
 
     </div>
 </div>

@@ -55,7 +55,9 @@ export class AccountComponent implements OnInit {
     }
 
     saveLanguages() {
+        if (this.languages.touched===false) return;
         if (!this.changeLanguageForm.valid) return;
+        console.log(this.user)
     }
 
 }
