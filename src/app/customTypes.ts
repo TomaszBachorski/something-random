@@ -50,6 +50,7 @@ type onlyJwtTokenInJson = {
 }
 
 type usersList = Array<{
+    id: number,
     username: string,
     rankId: number,
     languages: string

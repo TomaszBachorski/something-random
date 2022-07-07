@@ -42,7 +42,6 @@ export class AccountComponent implements OnInit {
             //set current languages in FormControl
             this.changeLanguageForm.controls["languages"].setValue(this.user.languages.join(","));
         });
-        //set title for this page
         this.titleService.setTitle("Account");
     }
     

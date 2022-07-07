@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { UsersPanelComponent } from './components/users-panel/users-panel.component';
 import { AccountComponent } from './components/account/account.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { AccountComponent } from './components/account/account.component';
         NavigationComponent,
         LanguageOverviewPanelComponent,
         UsersPanelComponent,
-        AccountComponent
+        AccountComponent,
+        UserViewComponent
     ],
     imports: [
         BrowserModule,

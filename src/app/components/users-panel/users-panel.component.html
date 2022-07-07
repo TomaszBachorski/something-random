@@ -7,7 +7,7 @@
                 <th>🚩 Languages</th>
             </tr>
             <tr *ngFor="let user of users">
-                <td>{{user.username}}</td>
+                <td><a routerLink="/users/{{ user.id }}">{{user.username}}</a></td>
                 <td>
                     {{ ranks[user.rankId]}}
                 </td>
