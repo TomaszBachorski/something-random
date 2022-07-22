@@ -18,6 +18,10 @@ import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { UsersPanelComponent } from './components/users-panel/users-panel.component';
 import { AccountComponent } from './components/account/account.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
+import { TranslateLanguageComponent } from './components/translate-language/translate-language.component';
+import { StringsListComponent } from './components/translate-language/strings-list/strings-list.component';
+import { TranslateFieldComponent } from './components/translate-language/translate-field/translate-field.component';
+import { CurrentTranslationsComponent } from './components/translate-language/current-translations/current-translations.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +34,11 @@ import { UserViewComponent } from './components/user-view/user-view.component';
         LanguageOverviewPanelComponent,
         UsersPanelComponent,
         AccountComponent,
-        UserViewComponent
+        UserViewComponent,
+        TranslateLanguageComponent,
+        StringsListComponent,
+        TranslateFieldComponent,
+        CurrentTranslationsComponent
     ],
     imports: [
         BrowserModule,

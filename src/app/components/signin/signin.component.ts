@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service.service';
@@ -8,7 +7,6 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { LoginUser } from 'src/app/user';
 
 import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
-import { loginResponse } from 'src/app/customTypes';
 import { TitleService } from 'src/app/services/title-service.service';
 
 @Component({
@@ -22,7 +20,6 @@ export class SigninComponent implements OnInit {
     toastContainer!: ToastContainerDirective;
 
     constructor(
-        private httpClient: HttpClient,
         private authService: AuthService,
         private route: ActivatedRoute,
         private router: Router,

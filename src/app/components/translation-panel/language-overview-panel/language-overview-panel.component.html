@@ -4,5 +4,5 @@
     <p>{{ translatedStrings }}/{{ availableStrings }}</p>
     <p>{{ (approved/availableStrings*100).toFixed(2) }}% Approved</p>
     <p>{{ numberOfContributors }} contributors</p>
-    <button>Translate</button>
+    <button routerLink="/translate/{{ language }}">Translate</button>
 </div>

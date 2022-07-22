@@ -77,5 +77,13 @@ type fullUserInformation = {
 
 }
 
+type stringsList = Array<{
+    stringKey: string,
+    stringContent: string,
+    additionalContext: string | null
+}>
+
+//strings service types
+export { stringsList }
 export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse, fullUserInformation }
 export { rolesEnum }
