@@ -19,7 +19,6 @@ export class TranslationPanelComponent implements OnInit {
     public availableUserLanguages: string[] = new Array();
 
     constructor(
-        private httpClient: HttpClient,
         private authService: AuthService,
         private router: Router,
         private localStorage: LocalStorageService,

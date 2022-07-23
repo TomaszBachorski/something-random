@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService } from 'src/app/services/title-service.service';
 
 @Component({
@@ -9,13 +9,20 @@ import { TitleService } from 'src/app/services/title-service.service';
 })
 export class TranslateLanguageComponent implements OnInit {
 
+    @Input() public language: string = "";
+
     constructor(
         private titleService: TitleService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle(`Translating ${this.router.url.split("/")[2]}`)
+        this.language = this.router.url.split("/")[2].split("?")[0];
+        this.titleService.setTitle(`Translating ${this.language}`);
+        this.route.queryParams.subscribe(params=>{ 
+            console.log(params)
+        })
     }
 
 }

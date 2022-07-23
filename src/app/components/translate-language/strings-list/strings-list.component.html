@@ -1,4 +1,6 @@
-<div class="stringBox" *ngFor="let string of stringsList">
+<div class="stringBox" *ngFor="let string of stringsList" 
+    routerLink="/translate/{{ this.language }}" 
+    [queryParams]="{stringKey: string.stringKey}">
     <p>{{ string.stringContent }}</p>
     <small>{{ string.stringKey }}</small>
 </div>

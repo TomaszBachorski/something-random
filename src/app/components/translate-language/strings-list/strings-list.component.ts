@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { stringsList } from 'src/app/customTypes';
 import { StringsService } from 'src/app/services/strings-service.service';
 
@@ -11,6 +10,7 @@ import { StringsService } from 'src/app/services/strings-service.service';
 export class StringsListComponent implements OnInit {
 
     public stringsList!: stringsList;
+    @Input() public language: string="";
     
     constructor(
         private stringsService: StringsService
@@ -19,7 +19,7 @@ export class StringsListComponent implements OnInit {
     ngOnInit(): void {
         this.stringsService.getStrings().subscribe((res: stringsList) => {
             this.stringsList = res;
-            console.log(res)
+            console.log(this.language)
         });
     }
 }
