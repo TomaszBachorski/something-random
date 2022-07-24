@@ -1,4 +1,9 @@
-<div class="stringBox" *ngFor="let string of stringsList" 
+<div class="filterBox">
+    <span (change)="change('pending')"> Pending <input type="checkbox" name="pending" id="pendingCheckbox" checked="true"> </span>
+    <span (change)="change('translated')"> Translated <input type="checkbox" name="translated" id="translatedCheckbox"></span>
+    <span (change)="change('approved')"> Approved <input type="checkbox" name="approved" id="approvedCheckbox"></span>
+</div>
+<div *ngFor="let string of stringsList" class="stringBox {{ string.status }} display" 
     routerLink="/translate/{{ this.language }}" 
     [queryParams]="{stringKey: string.stringKey}">
     <p>{{ string.stringContent }}</p>

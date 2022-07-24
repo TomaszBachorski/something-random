@@ -20,8 +20,8 @@ export class TranslateLanguageComponent implements OnInit {
     ngOnInit(): void {
         this.language = this.router.url.split("/")[2].split("?")[0];
         this.titleService.setTitle(`Translating ${this.language}`);
-        this.route.queryParams.subscribe(params=>{ 
-            console.log(params)
+        this.route.queryParams.subscribe(params=>{
+            
         })
     }
 

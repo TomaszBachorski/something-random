@@ -1,3 +1,18 @@
+.filterBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: x-large;
+}
+span {
+    display: flex;
+    align-items: center;
+}
+input[type=checkbox] {
+    width: 3vh;
+    height: 3vh;
+}
+
 .stringBox * {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -18,4 +33,20 @@ p {
     background-color: #ccc;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.display {
+    display: none;
+}
+
+.displaypending {
+    display: none;
+}
+
+.displaytranslated {
+    display: none;
+}
+
+.displayapproved {
+    display: none;
 }

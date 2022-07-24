@@ -80,7 +80,8 @@ type fullUserInformation = {
 type stringsList = Array<{
     stringKey: string,
     stringContent: string,
-    additionalContext: string | null
+    additionalContext: string | null,
+    status: "pending" | "translated" | "approved"
 }>
 
 //strings service types
