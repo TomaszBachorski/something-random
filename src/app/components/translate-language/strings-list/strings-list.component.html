@@ -3,7 +3,7 @@
     <span (change)="change('translated')"> Translated <input type="checkbox" name="translated" id="translatedCheckbox"></span>
     <span (change)="change('approved')"> Approved <input type="checkbox" name="approved" id="approvedCheckbox"></span>
 </div>
-<div *ngFor="let string of stringsList" class="stringBox {{ string.status }} display" 
+<div *ngFor="let string of stringsList" class="stringBox {{ string.status }} {{ string.status!=='pending' ? 'display' : '' }}"
     routerLink="/translate/{{ this.language }}" 
     [queryParams]="{stringKey: string.stringKey}">
     <p>{{ string.stringContent }}</p>
