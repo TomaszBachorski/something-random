@@ -12,6 +12,12 @@ export class StringsListComponent implements OnInit {
     public stringsList!: stringsList;
     @Input() public language: string = "";
 
+    public statusCheckbox = {
+        "pending": true,
+        "translated": false,
+        "approved": false
+    };
+
     constructor(
         private stringsService: StringsService
     ) { }
@@ -20,18 +26,12 @@ export class StringsListComponent implements OnInit {
         this.stringsService.getStrings(this.language).subscribe((res: stringsList) => {
             this.stringsList = res;
         });
-        // document.querySelectorAll("input[type=checkbox]").forEach((checkbox)=>{
-        //     if (checkbox.getAttribute("checked")!=="true") return;
-        //     console.log(checkbox)
-        //     document.querySelectorAll(`.${checkbox.id.split("Checkbox")[0]}`).forEach(e=>{
-        //         console.log(e)
-        //         e.classList.remove("display");
-        //     })
-        // })
     }
 
-    change(state: string): void {
+    change(state: "pending" | "translated" | "approved"): void {
         document.querySelectorAll(`.${state}`).forEach((e)=>{
+            this.statusCheckbox[state] = !this.statusCheckbox[state];
+            console.log(this.statusCheckbox)
             return e.classList.toggle(`display`)
         });
     }
