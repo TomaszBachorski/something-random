@@ -1,7 +1,7 @@
 <div class="filterBox">
-    <span (change)="change('pending')"> Pending <input type="checkbox" name="pending" id="pendingCheckbox" checked="true"> </span>
-    <span (change)="change('translated')"> Translated <input type="checkbox" name="translated" id="translatedCheckbox"></span>
-    <span (change)="change('approved')"> Approved <input type="checkbox" name="approved" id="approvedCheckbox"></span>
+    <span (change)="change('pending')"> Pending <input type="checkbox" id="pendingCheckbox" [checked]="this.statusCheckbox.pending"> </span>
+    <span (change)="change('translated')"> Translated <input type="checkbox" id="translatedCheckbox" [checked]="this.statusCheckbox.translated"></span>
+    <span (change)="change('approved')"> Approved <input type="checkbox" id="approvedCheckbox" [checked]="this.statusCheckbox.approved"></span>
 </div>
 <div *ngFor="let string of stringsList" class="stringBox {{ string.status }} {{ this.statusCheckbox[string.status] ? '' : 'display' }}"
     routerLink="/translate/{{ this.language }}" 
