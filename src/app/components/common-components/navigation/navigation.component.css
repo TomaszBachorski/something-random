@@ -7,7 +7,7 @@
 nav {
     width: 70%;
     padding: 20px;
-    height: 40px;
+    height: max(40px, fit-content);
     display: flex;
     justify-content: space-around;
     font-size: x-large;

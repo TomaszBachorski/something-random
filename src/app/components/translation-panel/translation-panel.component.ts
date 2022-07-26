@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core'
 import { AuthService } from 'src/app/services/auth-service.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';

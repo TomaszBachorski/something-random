@@ -84,7 +84,25 @@ type stringsList = Array<{
     status: "pending" | "translated" | "approved"
 }>
 
+type translation = {
+    userId: number,
+    translation: string,
+    approved: boolean
+}
+
+type stringInformation = {
+    stringExist: boolean,
+    stringKey: string | null,
+    stringContent: string | null,
+    additionalContext: string | null,
+    availableTranslations: Array<translation> | null
+}
+
 //strings service types
-export { stringsList }
+export { stringsList, stringInformation }
+
+//login and registration component with users service
 export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse, fullUserInformation }
+
+//general types
 export { rolesEnum }

@@ -8,10 +8,14 @@ div {
     flex-wrap: wrap;
 }
 strings-list {
-    width: 30%;
+    width: max(30%, 400px);
     height: calc(100vh - 100px - 80px); /* 1max height - footer - navigation*/
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+translate-field {
+    width: max(calc(60% - 12px), 400px);
 }
 
 ::-webkit-scrollbar {

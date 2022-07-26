@@ -1,8 +1,11 @@
 .filterBox {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
     font-size: x-large;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 span {
     display: flex;
