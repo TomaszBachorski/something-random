@@ -26,7 +26,6 @@ export class TranslateFieldComponent implements OnInit {
             if (!params["stringKey"]) return this.selectedString = false;
             console.log(params["stringKey"])
             this.stringsService.getString(params["stringKey"], this.language).subscribe((res: stringInformation) => {
-                console.log(res);
                 if (res.stringExist === false) return this.router.navigate(["/translate"]);
                 this.stringInformation = res;
                 return

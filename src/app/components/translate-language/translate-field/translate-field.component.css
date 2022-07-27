@@ -1,9 +1,6 @@
 #stringInformation > p {
     margin: 0;
-    font-size: x-large;
-}
-#stringInformation > small {
-    font-size: larger;
+    font-size: 20px;
 }
 
 input[type=text] {

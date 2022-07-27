@@ -1,8 +1,8 @@
-<div>
+<div *ngIf="stringInformation">
     <div id="stringInformation">
-        <p>String</p>
-        <small>String key:</small> <br>
-        <small>Description</small>
+        <p><b>String key</b>: {{ stringInformation.stringKey }}</p>
+        <p *ngIf="stringInformation?.additionalContext"><b>Description</b>: {{ stringInformation.additionalContext }}</p>
+        <p><b>Translate following text</b>: <br> {{ stringInformation.stringContent }}</p>
     </div>
     <input type="text" name="translation" id="translateField">
 </div>

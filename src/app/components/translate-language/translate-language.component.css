@@ -15,7 +15,8 @@ strings-list {
 }
 
 translate-field {
-    width: max(calc(60% - 12px), 400px);
+    width: max(calc(60% - 3% - 12px), 400px);
+    padding-left: 3%;
 }
 
 ::-webkit-scrollbar {
