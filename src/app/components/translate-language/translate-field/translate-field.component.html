@@ -4,5 +4,6 @@
         <p *ngIf="stringInformation?.additionalContext"><b>Description</b>: {{ stringInformation.additionalContext }}</p>
         <p><b>Translate following text</b>: <br> {{ stringInformation.stringContent }}</p>
     </div>
-    <input type="text" name="translation" id="translateField">
+    <textarea placeholder="{{ userTranslation===undefined ? 'Enter your translation here...' : ''}}" name="translation" id="translateField">{{ userTranslation===undefined ? "" : userTranslation.translation}}</textarea>
+
 </div>

@@ -26,6 +26,7 @@ type authenticateResponse = {
 }
 
 type jwtToken = {
+    userId: number,
     username: string,
     languages: string[],
     rankId: number,
@@ -99,7 +100,7 @@ type stringInformation = {
 }
 
 //strings service types
-export { stringsList, stringInformation }
+export { stringsList, stringInformation, translation }
 
 //login and registration component with users service
 export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse, fullUserInformation }

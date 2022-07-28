@@ -14,6 +14,7 @@ import jwt_decode from "jwt-decode";
 export class TranslateLanguageComponent implements OnInit {
 
     @Input() public language: string = "";
+    public user: any;
 
     constructor(
         private titleService: TitleService,
@@ -36,6 +37,7 @@ export class TranslateLanguageComponent implements OnInit {
             this.localStorage.set("jwtToken", res.jwtToken);
             let decodedToken: jwtToken = jwt_decode(jwtToken);
             if (!decodedToken.languages.includes(this.language)) this.router.navigate(["/translate"]);
+            this.user = decodedToken;
         });
         this.language = this.router.url.split("/")[2].split("?")[0];
         this.titleService.setTitle(`Translating ${this.language}`);
