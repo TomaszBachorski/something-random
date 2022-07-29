@@ -4,6 +4,7 @@ import { stringInformation, translation } from 'src/app/customTypes';
 import { StringsService } from 'src/app/services/strings-service.service';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { translationIsDifferent } from 'src/app/customValidators';
 
 @Component({
     selector: 'translate-field',
@@ -28,7 +29,9 @@ export class TranslateFieldComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
+            this.userTranslation?.translation
             if (!params["stringKey"]) return this.selectedString = false;
+            this.translationSubmit.reset()
             this.stringsService.getString(params["stringKey"], this.language).subscribe((res: stringInformation) => {
                 if (res.stringExist === false) return this.router.navigate(["/translate"]);
                 this.stringInformation = res;
@@ -48,9 +51,9 @@ export class TranslateFieldComponent implements OnInit {
     submit() {
         if (this.buttonUsed!=="submit") return
         if (this.translation.touched===false) this.translation.markAsTouched();
+        if (this.userTranslation?.translation===this.translationSubmit.controls["translation"].value && this.userTranslation!==undefined) return this.translationSubmit.controls["translation"].setErrors({ translationTheSame: true });
         if (this.translationSubmit.controls["translation"].errors) return;
         console.log(this.translationSubmit.controls)
-
     }
 
 }

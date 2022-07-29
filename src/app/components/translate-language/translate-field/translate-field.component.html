@@ -8,6 +8,7 @@
         <textarea formControlName="translation"
             placeholder="{{ userTranslation===undefined ? 'Enter your translation here...' : ''}}" name="translation" id="translateField" required></textarea>
         <p class="error" *ngIf="translation.touched && translation.errors?.['required']===true">You need to translate the text in case of submitting a translation</p>
+        <p class="error" *ngIf="translation.touched && translation.errors?.['translationTheSame']===true">Translation is the same as the previous one, so nothing has changed</p>
         <div id="buttons">
             <input type="submit" value="Submit" (click)="buttonUsed='submit'">
             <input type="submit" value="Delete" (click)="buttonUsed='delete'">

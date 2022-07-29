@@ -87,3 +87,14 @@ function emailAlreadyExists(userService: AuthService): ValidatorFn {
     }
 }
 export { englishAsNative, minimumAge, passwordMatchValidator, usernameAlreadyExists, emailAlreadyExists, unexpectedInput, supportedLanguages, maxNumberOfLanguages };
+
+//translating validator
+
+function translationIsDifferent(previousTranslation: string | undefined): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        console.log(previousTranslation)
+        return previousTranslation === control.value ? { translationTheSame: true } : null;
+    }
+}
+
+export { translationIsDifferent}
