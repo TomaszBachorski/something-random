@@ -4,7 +4,6 @@ import { stringInformation, translation } from 'src/app/customTypes';
 import { StringsService } from 'src/app/services/strings-service.service';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { translationIsDifferent } from 'src/app/customValidators';
 
 @Component({
     selector: 'translate-field',
