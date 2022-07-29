@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { stringInformation, translation } from 'src/app/customTypes';
 import { StringsService } from 'src/app/services/strings-service.service';
 import { AuthService } from 'src/app/services/auth-service.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'translate-field',
@@ -16,6 +17,7 @@ export class TranslateFieldComponent implements OnInit {
     public selectedString: boolean = false;
     public stringInformation: stringInformation | undefined;
     public userTranslation: translation | undefined;
+    public buttonUsed:string = "";
 
     constructor(
         private route: ActivatedRoute,
@@ -31,10 +33,24 @@ export class TranslateFieldComponent implements OnInit {
                 if (res.stringExist === false) return this.router.navigate(["/translate"]);
                 this.stringInformation = res;
                 this.userTranslation = this.stringInformation.availableTranslations?.find(t => t.userId === this.userId)
+                this.translationSubmit.controls["translation"].setValue(this.userTranslation?.translation)
                 return
             });
             return;
         });
+    }
+    translationSubmit = new FormGroup({
+        translation: new FormControl(null, [Validators.required])
+    })
+
+    get translation (): FormControl {return <FormControl>this.translationSubmit.get("translation")}
+
+    submit() {
+        if (this.buttonUsed!=="submit") return
+        if (this.translation.touched===false) this.translation.markAsTouched();
+        if (this.translationSubmit.controls["translation"].errors) return;
+        console.log(this.translationSubmit.controls)
+
     }
 
 }
