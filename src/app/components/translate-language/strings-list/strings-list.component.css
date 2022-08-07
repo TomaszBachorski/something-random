@@ -1,9 +1,9 @@
 .filterBox {
-    width: 100%;
+    width: fit-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    font-size: x-large;
+    font-size: larger;
     margin-top: 1vh;
     margin-bottom: 1vh;
 }
@@ -16,15 +16,14 @@ input[type=checkbox] {
     height: 3vh;
 }
 
-.stringBox * {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: large;
-}
 p {
     margin: 0;
     font-weight: bold;
+}
+
+#stringsBox {
+    position:unset;
+    overflow: hidden;
 }
 
 .stringBox {
@@ -38,6 +37,38 @@ p {
     cursor: pointer;
 }
 
+.stringBox * {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: large;
+}
+
 .display {
     display: none;
+}
+
+
+#stringsBox {
+    width: max(30%, 400px);
+    height: calc(100vh - 100px - 80px - 20px); /* 1max height - footer - navigation*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#stringsBox::-webkit-scrollbar {
+    width: 12px;
+}
+  
+#stringsBox::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+#stringsBox::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 10px;
+}
+
+#stringsBox::-webkit-scrollbar-thumb:hover {
+    background: grey; 
 }

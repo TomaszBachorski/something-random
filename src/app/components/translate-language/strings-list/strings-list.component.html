@@ -3,9 +3,11 @@
     <span (change)="change('translated')"> Translated <input type="checkbox" id="translatedCheckbox" [checked]="this.statusCheckbox.translated"></span>
     <span (change)="change('approved')"> Approved <input type="checkbox" id="approvedCheckbox" [checked]="this.statusCheckbox.approved"></span>
 </div>
-<div *ngFor="let string of stringsList" class="stringBox {{ string.status }} {{ this.statusCheckbox[string.status] ? '' : 'display' }}"
-    routerLink="/translate/{{ this.language }}" 
-    [queryParams]="{stringKey: string.stringKey}">
-    <p>{{ string.stringContent }}</p>
-    <small>{{ string.stringKey }}</small>
+<div id="stringsBox">
+    <div *ngFor="let string of stringsList" class="stringBox {{ string.status }} {{ this.statusCheckbox[string.status] ? '' : 'display' }}"
+        routerLink="/translate/{{ this.language }}" 
+        [queryParams]="{stringKey: string.stringKey}">
+        <p>{{ string.stringContent }}</p>
+        <small>{{ string.stringKey }}</small>
+    </div>
 </div>

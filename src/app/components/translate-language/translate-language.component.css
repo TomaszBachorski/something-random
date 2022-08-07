@@ -10,7 +10,7 @@ div {
 strings-list {
     width: max(30%, 400px);
     height: calc(100vh - 100px - 80px); /* 1max height - footer - navigation*/
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
@@ -19,19 +19,3 @@ translate-field {
     padding-left: 3%;
 }
 
-::-webkit-scrollbar {
-    width: 12px;
-}
-  
-::-webkit-scrollbar-track {
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: grey; 
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: grey; 
-}
