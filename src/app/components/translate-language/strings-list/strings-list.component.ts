@@ -3,11 +3,15 @@ import { stringsList } from 'src/app/customTypes';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { StringsService } from 'src/app/services/strings-service.service';
 
+type pta = "pending" | "translated" | "approved"
+
 @Component({
     selector: 'strings-list',
     templateUrl: './strings-list.component.html',
     styleUrls: ['./strings-list.component.css']
 })
+
+
 export class StringsListComponent implements OnInit {
 
     public stringsList!: stringsList;
@@ -29,11 +33,10 @@ export class StringsListComponent implements OnInit {
             this.stringsList = res;
         });
 
-        //loading previously saved options
-
+        //loading previously choosen options
         Object.keys(this.statusCheckbox).forEach((key)=>{
-            if (this.localStorage.get(key)==="true") this.statusCheckbox[key as "pending" | "translated" | "approved"] = true;
-            if (this.localStorage.get(key)==="false") this.statusCheckbox[key as "pending" | "translated" | "approved"] = false;
+            if (this.localStorage.get(key)==="true") this.statusCheckbox[key as pta] = true;
+            if (this.localStorage.get(key)==="false") this.statusCheckbox[key as pta] = false;
         })
     }
 
@@ -41,11 +44,11 @@ export class StringsListComponent implements OnInit {
     @HostListener('window:unload')
     private onUnload(): void {
         Object.keys(this.statusCheckbox).forEach(key=>{
-            this.localStorage.set(key, String(this.statusCheckbox[key as "pending" | "translated" | "approved"]))
+            this.localStorage.set(key, String(this.statusCheckbox[key as pta]))
         })
     }
 
-    change(state: "pending" | "translated" | "approved"): void {
+    change(state: pta): void {
         document.querySelectorAll(`.${state}`).forEach((e)=>{
             this.statusCheckbox[state] = !this.statusCheckbox[state];
             return e.classList.toggle(`display`)

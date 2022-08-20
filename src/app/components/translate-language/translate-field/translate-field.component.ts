@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { stringInformation, translation } from 'src/app/customTypes';
+import { stringInformation, stringsList, translation } from 'src/app/customTypes';
 import { StringsService } from 'src/app/services/strings-service.service';
-import { AuthService } from 'src/app/services/auth-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
     selector: 'translate-field',
@@ -14,29 +14,27 @@ export class TranslateFieldComponent implements OnInit {
 
     @Input() public language: string = "";
     @Input() public userId: number = 0;
-    public selectedString: boolean = false;
     public stringInformation: stringInformation | undefined;
     public userTranslation: translation | undefined;
-    public buttonUsed:string = "";
+    public buttonUsed: string = "";
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private stringsService: StringsService,
-        private authService: AuthService
+        private localStorageService: LocalStorageService
     ) { }
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
-            this.userTranslation?.translation
-            if (!params["stringKey"]) return this.selectedString = false;
+            this.userTranslation?.translation;
             this.translationSubmit.reset()
             this.stringsService.getString(params["stringKey"], this.language).subscribe((res: stringInformation) => {
                 if (res.stringExist === false) return this.router.navigate(["/translate"]);
                 this.stringInformation = res;
-                this.userTranslation = this.stringInformation.availableTranslations?.find(t => t.userId === this.userId)
-                this.translationSubmit.controls["translation"].setValue(this.userTranslation?.translation)
-                return
+                this.userTranslation = this.stringInformation.availableTranslations?.find(t => t.userId === this.userId);
+                this.translationSubmit.controls["translation"].setValue(this.userTranslation?.translation);
+                return;
             });
             return;
         });
@@ -45,14 +43,34 @@ export class TranslateFieldComponent implements OnInit {
         translation: new FormControl(null, [Validators.required])
     })
 
-    get translation (): FormControl {return <FormControl>this.translationSubmit.get("translation")}
+    get translation(): FormControl { return <FormControl>this.translationSubmit.get("translation") }
 
     submit() {
-        if (this.buttonUsed!=="submit") return
-        if (this.translation.touched===false) this.translation.markAsTouched();
-        if (this.userTranslation?.translation===this.translationSubmit.controls["translation"].value && this.userTranslation!==undefined) return this.translationSubmit.controls["translation"].setErrors({ translationTheSame: true });
+        console.log(this.stringInformation)
+        if (this.buttonUsed === "next" || this.buttonUsed ==="previous") {
+            let currentCheckboxes = {pending: this.localStorageService.get("pending")!, approved: this.localStorageService.get("approved")!, translated: this.localStorageService.get("translated")! };
+            // console.log(currentCheckboxes);
+            this.stringsService.getStrings(this.language).subscribe((res: stringsList)=>{
+                res = res.filter(str=>{return currentCheckboxes[str.status]==="true"});
+                let stringKeys: string[] = res.map(obj=>obj.stringKey);
+                console.log(stringKeys);
+                let index: number = stringKeys.findIndex(o=>o===this.stringInformation!.stringKey);
+                if (index===0 && this.buttonUsed==="previous") return alert("There are no more previous strings");
+                if (index===stringKeys.length-1 && this.buttonUsed==="next") return alert("You can't go any further, cause there is nothing behind");
+                if (this.buttonUsed==="next") index+=1;
+                if (this.buttonUsed==="previous") index-=1;
+                this.router.navigate([`/translate/`, this.language], {queryParams: {stringKey: stringKeys[index]}});
+                this.buttonUsed="";
+                return;
+            });
+            return;
+        }
+        if (this.buttonUsed !== "submit") return;
+        if (this.translation.touched === false) this.translation.markAsTouched();
+        if (this.userTranslation?.translation === this.translationSubmit.controls["translation"].value && this.userTranslation !== undefined) return this.translationSubmit.controls["translation"].setErrors({ translationTheSame: true });
+        if (this.userTranslation?.approved == true) return this.translationSubmit.controls["translation"].setErrors({ approved: true });
         if (this.translationSubmit.controls["translation"].errors) return;
-        console.log(this.translationSubmit.controls)
+        console.log(this.translationSubmit.controls);
     }
 
 }

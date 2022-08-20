@@ -19,7 +19,6 @@ export class TranslateLanguageComponent implements OnInit {
     constructor(
         private titleService: TitleService,
         private router: Router,
-        private route: ActivatedRoute,
         private localStorage: LocalStorageService,
         private authService: AuthService
     ) { }
@@ -30,7 +29,7 @@ export class TranslateLanguageComponent implements OnInit {
             this.localStorage.removeAll();
             return;
         }
-        let jwtToken: string = this.localStorage.get("jwtToken")!
+        let jwtToken: string = this.localStorage.get("jwtToken")!;
         this.authService.authenticate(jwtToken);
 
         this.authService.refreshUserInformation(jwtToken, this.localStorage.get("expiresAt")!).subscribe((res: onlyJwtTokenInJson) => {
