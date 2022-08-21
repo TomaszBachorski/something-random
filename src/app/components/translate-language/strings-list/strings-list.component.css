@@ -29,11 +29,11 @@ p {
 .stringBox {
     padding: 5px 0 5px 5px;
     margin-right: 5px;
+    border-radius: 5px;
 }
 
 .stringBox:hover {
     background-color: #ccc;
-    border-radius: 3px;
     cursor: pointer;
 }
 
@@ -47,7 +47,6 @@ p {
 .display {
     display: none;
 }
-
 
 #stringsBox {
     width: max(30%, 400px);

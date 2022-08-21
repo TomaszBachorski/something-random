@@ -33,10 +33,12 @@ textarea:active {
 div#buttons {
     margin: 10px 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 input[type=submit] {
+    width: min(15%, 150px);
     padding: 10px;
     background-color: white;
     border-radius: 10px;
@@ -44,8 +46,11 @@ input[type=submit] {
     border: 3px solid gray;
     font-size: 18px;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
 input[type=submit]:hover {
     border: 3px solid black;
+    background-color: #eee;
+    box-shadow: 0 0 8px gray;
 }

@@ -27,8 +27,9 @@ export class TranslateFieldComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
-            this.userTranslation?.translation;
-            this.translationSubmit.reset()
+            // this.userTranslation?.translation;
+            if (!params["stringKey"]) return;
+            this.translationSubmit.reset();
             this.stringsService.getString(params["stringKey"], this.language).subscribe((res: stringInformation) => {
                 if (res.stringExist === false) return this.router.navigate(["/translate"]);
                 this.stringInformation = res;
@@ -46,14 +47,11 @@ export class TranslateFieldComponent implements OnInit {
     get translation(): FormControl { return <FormControl>this.translationSubmit.get("translation") }
 
     submit() {
-        console.log(this.stringInformation)
         if (this.buttonUsed === "next" || this.buttonUsed ==="previous") {
-            let currentCheckboxes = {pending: this.localStorageService.get("pending")!, approved: this.localStorageService.get("approved")!, translated: this.localStorageService.get("translated")! };
-            // console.log(currentCheckboxes);
+            let currentCheckboxes = {pending: this.localStorageService.get("pending"), approved: this.localStorageService.get("approved"), translated: this.localStorageService.get("translated") };
             this.stringsService.getStrings(this.language).subscribe((res: stringsList)=>{
                 res = res.filter(str=>{return currentCheckboxes[str.status]==="true"});
                 let stringKeys: string[] = res.map(obj=>obj.stringKey);
-                console.log(stringKeys);
                 let index: number = stringKeys.findIndex(o=>o===this.stringInformation!.stringKey);
                 if (index===0 && this.buttonUsed==="previous") return alert("There are no more previous strings");
                 if (index===stringKeys.length-1 && this.buttonUsed==="next") return alert("You can't go any further, cause there is nothing behind");

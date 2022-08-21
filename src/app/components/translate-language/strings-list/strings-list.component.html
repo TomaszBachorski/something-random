@@ -5,6 +5,7 @@
 </div>
 <div id="stringsBox">
     <div *ngFor="let string of stringsList" class="stringBox {{ string.status }} {{ this.statusCheckbox[string.status] ? '' : 'display' }}"
+        id="{{ string.stringKey }}"
         routerLink="/translate/{{ this.language }}" 
         [queryParams]="{stringKey: string.stringKey}">
         <p>{{ string.stringContent }}</p>
