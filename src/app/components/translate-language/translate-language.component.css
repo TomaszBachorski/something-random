@@ -6,16 +6,19 @@ div {
     margin-left: 5%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 strings-list {
     width: max(30%, 400px);
-    height: calc(100vh - 100px - 80px); /* 1max height - footer - navigation*/
+    margin-top: 10px;
+    height: calc(100vh - 100px - 80px - 10px); /* 1max height - footer - navigation - margin top*/
     overflow-y: hidden;
     overflow-x: hidden;
 }
 
 translate-field {
     width: max(calc(60% - 3% - 12px), 400px);
+    margin-top: 10px;
     padding-left: 3%;
 }
 

@@ -44,10 +44,12 @@ export class StringsListComponent implements OnInit {
         this.route.queryParams.subscribe((params: Params)=>{
             if (!params["stringKey"]) return;
             let element = document.getElementById(params["stringKey"])
+            console.log(element)
             if (!element) return;
-            document.querySelectorAll(".stringBox").forEach((element)=>{
-                (element as HTMLElement).style.backgroundColor = "#fff";
-                (element as HTMLElement).style.color = "#000";
+            let strings: NodeListOf<HTMLElement> = document.querySelectorAll(".stringBox")
+            strings.forEach((element: HTMLElement)=>{
+                element.style.backgroundColor = "#fff";
+                element.style.color = "#000";
             });
             element.style.backgroundColor = "#aaa";
             element.style.color = "#fff";

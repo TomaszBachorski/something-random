@@ -38,7 +38,7 @@ div#buttons {
 }
 
 input[type=submit] {
-    width: min(15%, 150px);
+    min-width: min(15%, 150px);
     padding: 10px;
     background-color: white;
     border-radius: 10px;
