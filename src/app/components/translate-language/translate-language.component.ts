@@ -14,7 +14,7 @@ import jwt_decode from "jwt-decode";
 export class TranslateLanguageComponent implements OnInit {
 
     @Input() public language: string = "";
-    public user: any;
+    public user!: jwtToken;
 
     constructor(
         private titleService: TitleService,
