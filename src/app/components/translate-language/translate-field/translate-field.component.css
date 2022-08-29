@@ -54,3 +54,15 @@ input[type=submit]:hover {
     background-color: #eee;
     box-shadow: 0 0 8px gray;
 }
+input:disabled {
+    cursor: not-allowed;
+    background-color: #ddd;
+    color: gray;
+}
+
+input:hover:disabled {
+    box-shadow: none;
+    background-color: #ddd;
+    color: gray;
+    border: 3px solid gray;
+}

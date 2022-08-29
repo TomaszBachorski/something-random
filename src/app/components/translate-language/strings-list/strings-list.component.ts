@@ -40,20 +40,20 @@ export class StringsListComponent implements OnInit {
             if (this.localStorage.get(key)==="true") this.statusCheckbox[key as pta] = true;
             if (this.localStorage.get(key)==="false") this.statusCheckbox[key as pta] = false;
         });
-        
-        this.route.queryParams.subscribe((params: Params)=>{
-            if (!params["stringKey"]) return;
-            let element = document.getElementById(params["stringKey"])
-            console.log(element)
-            if (!element) return;
-            let strings: NodeListOf<HTMLElement> = document.querySelectorAll(".stringBox")
-            strings.forEach((element: HTMLElement)=>{
-                element.style.backgroundColor = "#fff";
-                element.style.color = "#000";
+        setTimeout(()=>{
+            this.route.queryParams.subscribe((params: Params)=>{
+                if (!params["stringKey"]) return;
+                let element = document.getElementById(params["stringKey"]);
+                if (!element) return;
+                let strings: NodeListOf<HTMLElement> = document.querySelectorAll(".stringBox");
+                strings.forEach((element: HTMLElement)=>{
+                    element.style.backgroundColor = "#fff";
+                    element.style.color = "#000";
+                });
+                element.style.backgroundColor = "#aaa";
+                element.style.color = "#fff";
             });
-            element.style.backgroundColor = "#aaa";
-            element.style.color = "#fff";
-        });
+        }, 500)
     }
 
     //saving currently choosen filter options
@@ -61,7 +61,7 @@ export class StringsListComponent implements OnInit {
     private onUnload(): void {
         Object.keys(this.statusCheckbox).forEach(key=>{
             this.localStorage.set(key, String(this.statusCheckbox[key as pta]));
-        })
+        });
     }
 
     change(state: pta): void {

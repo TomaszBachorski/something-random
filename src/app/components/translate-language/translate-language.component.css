@@ -22,6 +22,5 @@ strings-list {
 translate-field {
     width: max(calc(60% - 3% - 12px), 400px);
     margin-top: 10px;
-    padding-left: 3%;
 }
 

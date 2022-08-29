@@ -12,7 +12,7 @@
         <p class="error" *ngIf="translation.touched && translation.errors?.['approved']===true">Cannot change translations because current one is already approved.</p>
         <div id="buttons">
             <input type="submit" value="Submit" (click)="buttonUsed='submit'">
-            <input type="submit" value="Delete" (click)="buttonUsed='delete'">
+            <input type="submit" value="Delete" (click)="buttonUsed='delete'" [attr.disabled]="userTranslation ? null : true">
             <input type="submit" value="Previous" (click)="buttonUsed='previous'">
             <input type="submit" value="Next" (click)="buttonUsed='next'">
         </div>

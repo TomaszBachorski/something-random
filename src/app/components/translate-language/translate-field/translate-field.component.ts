@@ -13,7 +13,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class TranslateFieldComponent implements OnInit {
 
     @Input() public language: string = "";
-    @Input() public userId: number = 0;
+    @Input() public userId: number | undefined = 0;
     public stringInformation: stringInformation | undefined;
     public userTranslation: translation | undefined;
     public buttonUsed: string = "";
@@ -47,21 +47,27 @@ export class TranslateFieldComponent implements OnInit {
     get translation(): FormControl { return <FormControl>this.translationSubmit.get("translation") }
 
     submit() {
-        if (this.buttonUsed === "next" || this.buttonUsed ==="previous") {
-            let currentCheckboxes = {pending: this.localStorageService.get("pending"), approved: this.localStorageService.get("approved"), translated: this.localStorageService.get("translated") };
-            this.stringsService.getStrings(this.language).subscribe((res: stringsList)=>{
-                res = res.filter(str=>{return currentCheckboxes[str.status]==="true"});
-                let stringKeys: string[] = res.map(obj=>obj.stringKey);
-                let index: number = stringKeys.findIndex(o=>o===this.stringInformation!.stringKey);
-                if (index===0 && this.buttonUsed==="previous") return alert("There are no more previous strings");
-                if (index===stringKeys.length-1 && this.buttonUsed==="next") return alert("You can't go any further, cause there is nothing behind");
-                if (this.buttonUsed==="next") index+=1;
-                if (this.buttonUsed==="previous") index-=1;
-                this.router.navigate([`/translate/`, this.language], {queryParams: {stringKey: stringKeys[index]}});
-                this.buttonUsed="";
+        if (this.buttonUsed === "next" || this.buttonUsed === "previous") {
+            let currentCheckboxes = { pending: this.localStorageService.get("pending"), approved: this.localStorageService.get("approved"), translated: this.localStorageService.get("translated") };
+            this.stringsService.getStrings(this.language).subscribe((res: stringsList) => {
+                res = res.filter(str => { return currentCheckboxes[str.status] === "true" });
+                let stringKeys: string[] = res.map(obj => obj.stringKey);
+                let index: number = stringKeys.findIndex(o => o === this.stringInformation!.stringKey);
+                if (index === 0 && this.buttonUsed === "previous") return alert("There are no more previous strings");
+                if (index === stringKeys.length - 1 && this.buttonUsed === "next") return alert("You can't go any further, cause there is nothing behind");
+                if (this.buttonUsed === "next") index += 1;
+                if (this.buttonUsed === "previous") index -= 1;
+                this.router.navigate([`/translate/`, this.language], { queryParams: { stringKey: stringKeys[index] } });
+                this.buttonUsed = "";
                 return;
             });
             return;
+        }
+        if (this.buttonUsed === "delete") {
+            let answer = confirm("Are you sure, that you want to delete your own translation? This action cannot be undone.");
+            if (answer===false) return;
+            console.log(answer)
+            
         }
         if (this.buttonUsed !== "submit") return;
         if (this.translation.touched === false) this.translation.markAsTouched();
