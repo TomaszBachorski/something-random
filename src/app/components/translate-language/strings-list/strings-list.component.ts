@@ -24,11 +24,13 @@ export class StringsListComponent implements OnInit {
         "approved": false
     };
 
+    public currentString: string = "";
+
     constructor(
         private stringsService: StringsService,
         private localStorage: LocalStorageService,
         private route: ActivatedRoute
-        ) { }
+    ) { }
 
     ngOnInit(): void {
         this.stringsService.getStrings(this.language).subscribe((res: stringsList) => {
@@ -36,22 +38,25 @@ export class StringsListComponent implements OnInit {
         });
 
         //loading previously choosen options
-        Object.keys(this.statusCheckbox).forEach((key)=>{
-            if (this.localStorage.get(key)==="true") this.statusCheckbox[key as pta] = true;
-            if (this.localStorage.get(key)==="false") this.statusCheckbox[key as pta] = false;
+        Object.keys(this.statusCheckbox).forEach((key) => {
+            if (this.localStorage.get(key) === "true") this.statusCheckbox[key as pta] = true;
+            if (this.localStorage.get(key) === "false") this.statusCheckbox[key as pta] = false;
         });
-        setTimeout(()=>{
-            this.route.queryParams.subscribe((params: Params)=>{
+        setTimeout(() => {
+            this.route.queryParams.subscribe((params: Params) => {
                 if (!params["stringKey"]) return;
-                let element = document.getElementById(params["stringKey"]);
-                if (!element) return;
+                this.currentString = params["stringKey"];
+                let choosenElement = document.getElementById(params["stringKey"]);
+                if (!choosenElement) return;
                 let strings: NodeListOf<HTMLElement> = document.querySelectorAll(".stringBox");
-                strings.forEach((element: HTMLElement)=>{
+                console.log(this.currentString)
+                strings.forEach((element: HTMLElement) => {
+                    if (element.id === this.currentString) return;
                     element.style.backgroundColor = "#fff";
                     element.style.color = "#000";
                 });
-                element.style.backgroundColor = "#aaa";
-                element.style.color = "#fff";
+                choosenElement.style.backgroundColor = "#aaa";
+                choosenElement.style.color = "#fff";
             });
         }, 500)
     }
@@ -59,13 +64,13 @@ export class StringsListComponent implements OnInit {
     //saving currently choosen filter options
     @HostListener('window:unload')
     private onUnload(): void {
-        Object.keys(this.statusCheckbox).forEach(key=>{
+        Object.keys(this.statusCheckbox).forEach(key => {
             this.localStorage.set(key, String(this.statusCheckbox[key as pta]));
         });
     }
 
     change(state: pta): void {
-        document.querySelectorAll(`.${state}`).forEach((e)=>{
+        document.querySelectorAll(`.${state}`).forEach((e) => {
             this.statusCheckbox[state] = !this.statusCheckbox[state];
             this.localStorage.set(state, this.statusCheckbox[state].toString());
             return e.classList.toggle(`display`);

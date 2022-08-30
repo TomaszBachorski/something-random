@@ -1,3 +1,10 @@
-<div>
-    
+<div *ngIf="stringKey!==''" id="currentTranslations">
+    <div *ngFor="let translation of this.stringInformation.availableTranslations" class="{{ translation.approved ? 'approved' : 'notApproved' }} userTranslation">
+        <div id="userInformation">
+            {{ translation.userId}}
+        </div> 
+        <div id="translation">
+            {{ translation.translation }}
+        </div>
+    </div>
 </div>

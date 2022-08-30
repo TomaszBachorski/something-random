@@ -33,7 +33,7 @@ p {
 }
 
 .stringBox:hover {
-    background-color: #ccc;
+    background-color: #ccc !important;
     cursor: pointer;
 }
 

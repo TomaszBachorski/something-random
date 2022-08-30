@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: "users", component: UsersPanelComponent },
     { path: "users/:id", component: UserViewComponent},
     { path: "account", component: AccountComponent},
-    { path: "translate/:language", component: TranslateLanguageComponent}
+    { path: "translate/:language", component: TranslateLanguageComponent}, 
 ]
 
 @NgModule({

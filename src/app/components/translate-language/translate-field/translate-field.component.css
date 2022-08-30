@@ -5,13 +5,14 @@
 
 textarea {
     resize: none;
-    width: 100%;
+    width: calc(100% - 6px);
     height: 200px;
     border: 3px solid gray;
     border-radius: 10px;
     vertical-align: top;
     font-size: 20px;
     margin: 10px 0;
+    padding: 0;
 }
 
 textarea:active {

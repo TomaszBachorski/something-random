@@ -19,8 +19,18 @@ strings-list {
     flex-wrap: wrap;
 }
 
-translate-field {
-    width: max(calc(60% - 3% - 12px), 400px);
+#rightBox {
     margin-top: 10px;
+    margin-left: 0;
+    width: max(calc(60% - 3% - 12px), 400px);
+    display: inline-block;
+
+}
+translate-field {
+    width: 100%;
+    height: 500px;
+}
+current-translations {
+    width: 100%
 }
 

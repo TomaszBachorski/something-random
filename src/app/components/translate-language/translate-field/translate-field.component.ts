@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { stringInformation, stringsList, translation } from 'src/app/customTypes';
 import { StringsService } from 'src/app/services/strings-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -26,8 +26,7 @@ export class TranslateFieldComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.route.queryParams.subscribe(params => {
-            // this.userTranslation?.translation;
+        this.route.queryParams.subscribe((params: Params) => {
             if (!params["stringKey"]) return;
             this.translationSubmit.reset();
             this.stringsService.getString(params["stringKey"], this.language).subscribe((res: stringInformation) => {
@@ -65,9 +64,9 @@ export class TranslateFieldComponent implements OnInit {
         }
         if (this.buttonUsed === "delete") {
             let answer = confirm("Are you sure, that you want to delete your own translation? This action cannot be undone.");
-            if (answer===false) return;
+            if (answer === false) return;
             console.log(answer)
-            
+
         }
         if (this.buttonUsed !== "submit") return;
         if (this.translation.touched === false) this.translation.markAsTouched();
