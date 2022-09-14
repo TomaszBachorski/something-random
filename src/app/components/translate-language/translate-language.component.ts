@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { jwtToken, onlyJwtTokenInJson } from 'src/app/customTypes';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { jwtToken, onlyJwtTokenInJson, stringInformation } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { TitleService } from 'src/app/services/title-service.service';
 import jwt_decode from "jwt-decode";
+import { StringsService } from 'src/app/services/strings-service.service';
 
 @Component({
     selector: 'app-translate-language',
@@ -15,12 +16,14 @@ export class TranslateLanguageComponent implements OnInit {
 
     @Input() public language: string = "";
     public user!: jwtToken | null;
+    public stringInformation!: stringInformation;
 
     constructor(
         private titleService: TitleService,
         private router: Router,
         private localStorage: LocalStorageService,
-        private authService: AuthService
+        private authService: AuthService,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit(): void {

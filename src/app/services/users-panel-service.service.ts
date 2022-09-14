@@ -14,4 +14,10 @@ export class UsersPanelService {
     getUsers(language?: string) {
         return this.http.post<usersList>("http://localhost:7200/getUsers", {language: language});
     }
+    getSingleUser(id: number) {
+        return this.http.post<usersList>("http://localhost:7200/getSingleUser", {userId: id});
+    }
+    getMultipleUsers(ids: number[]) {
+        return this.http.post<usersList>("http://localhost:7200/getMultipleUsers", {userIds: ids});
+    }
 }

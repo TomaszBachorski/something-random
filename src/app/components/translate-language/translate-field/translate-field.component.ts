@@ -30,7 +30,6 @@ export class TranslateFieldComponent implements OnInit {
             if (!params["stringKey"]) return;
             this.translationSubmit.reset();
             this.stringsService.getString(params["stringKey"], this.language).subscribe((res: stringInformation) => {
-                if (res.stringExist === false) return this.router.navigate(["/translate"]);
                 this.stringInformation = res;
                 this.userTranslation = this.stringInformation.availableTranslations?.find(t => t.userId === this.userId);
                 this.translationSubmit.controls["translation"].setValue(this.userTranslation?.translation);
@@ -41,9 +40,9 @@ export class TranslateFieldComponent implements OnInit {
     }
     translationSubmit = new FormGroup({
         translation: new FormControl(null, [Validators.required])
-    })
+    });
 
-    get translation(): FormControl { return <FormControl>this.translationSubmit.get("translation") }
+    get translation(): FormControl { return <FormControl>this.translationSubmit.get("translation") };
 
     submit() {
         if (this.buttonUsed === "next" || this.buttonUsed === "previous") {

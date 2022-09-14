@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { stringsList } from 'src/app/customTypes';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { StringsService } from 'src/app/services/strings-service.service';
@@ -11,8 +11,6 @@ type pta = "pending" | "translated" | "approved"
     templateUrl: './strings-list.component.html',
     styleUrls: ['./strings-list.component.css']
 })
-
-
 export class StringsListComponent implements OnInit {
 
     public stringsList!: stringsList;
@@ -29,7 +27,8 @@ export class StringsListComponent implements OnInit {
     constructor(
         private stringsService: StringsService,
         private localStorage: LocalStorageService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
