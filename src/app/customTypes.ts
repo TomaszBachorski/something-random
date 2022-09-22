@@ -99,11 +99,16 @@ type stringInformation = {
     availableTranslations: Array<translation> | null
 }
 
+type multipleUsersArray = Array<{ id: number, username: string, rankId: rolesEnum }>
+
 //strings service types
 export { stringsList, stringInformation, translation }
 
 //login and registration component with users service
 export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse, fullUserInformation }
+
+//different
+export { multipleUsersArray }
 
 //general types
 export { rolesEnum }
