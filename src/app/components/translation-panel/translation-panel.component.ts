@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import jwt_decode from "jwt-decode";
-import { jwtToken, onlyJwtTokenInJson, supportedLanguages } from 'src/app/customTypes';
+import { jwtToken, supportedLanguages } from 'src/app/customTypes';
 import { TranslateService } from 'src/app/services/translate-service.service';
 import { TitleService } from 'src/app/services/title-service.service';
 
@@ -31,10 +31,12 @@ export class TranslationPanelComponent implements OnInit {
             return;
         }
         this.titleService.setTitle("Translate");
-        this.authService.authenticate(this.localStorage.get("jwtToken")!); //Further away token is valid!
-        this.authService.refreshUserInformation(this.localStorage.get("jwtToken")!, this.localStorage.get("expiresAt")!).subscribe((res: onlyJwtTokenInJson) => {
-            this.localStorage.set("jwtToken", res.jwtToken);
-            let decodedToken: jwtToken = jwt_decode(this.localStorage.get("jwtToken")!);
+        let token: string | null = this.localStorage.get("jwtToken")
+        if (!token) return;
+        this.authService.authenticate(token); //Further away token is valid!
+        this.authService.refreshUserInformation(token, this.localStorage.get("expiresAt")!).subscribe((res: {jwtBearerToken: string}) => {
+            this.localStorage.set("jwtToken", res.jwtBearerToken);
+            let decodedToken: jwtToken = jwt_decode(token!);
             this.userLanguages = decodedToken.languages;
             this.translateService.getSupportedLanguages().subscribe((res: supportedLanguages) => {
                 //Checking which languages are available => not every language is supported

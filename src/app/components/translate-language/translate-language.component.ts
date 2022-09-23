@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { jwtToken, onlyJwtTokenInJson, stringInformation } from 'src/app/customTypes';
+import { jwtToken, stringInformation } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { TitleService } from 'src/app/services/title-service.service';
@@ -35,8 +35,8 @@ export class TranslateLanguageComponent implements OnInit {
         let jwtToken: string = this.localStorage.get("jwtToken")!;
         this.authService.authenticate(jwtToken);
 
-        this.authService.refreshUserInformation(jwtToken, this.localStorage.get("expiresAt")!).subscribe((res: onlyJwtTokenInJson) => {
-            this.localStorage.set("jwtToken", res.jwtToken);
+        this.authService.refreshUserInformation(jwtToken, this.localStorage.get("expiresAt")!).subscribe((res: {jwtBearerToken: string}) => {
+            this.localStorage.set("jwtToken", res.jwtBearerToken);
             let decodedToken: jwtToken = jwt_decode(jwtToken);
             if (!decodedToken.languages.includes(this.language)) this.router.navigate(["/translate"]);
             this.user = decodedToken;

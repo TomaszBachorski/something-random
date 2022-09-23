@@ -1,7 +1,7 @@
 <div *ngIf="stringKey!=='' && this.stringInformation && this.stringInformation.availableTranslations" id="currentTranslations">
     <div *ngFor="let translation of this.displayData" class="{{ translation.approved ? 'approved' : 'notApproved' }} userTranslation">
         <div id="userInformation">
-            {{ translation.username }} | {{ translation.rankId }}
+            <b>{{ translation.username }} | {{ translation.rankId }}</b>
         </div> 
         <div id="translation">
             {{ translation.translation }}

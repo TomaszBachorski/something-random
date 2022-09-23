@@ -1,9 +1,9 @@
 
-type usernameExists = {
+type usernameTaken = {
     taken: boolean
 }
 type emailTaken = {
-    exists: boolean
+    taken: boolean
 }
 
 type loginResponse = {
@@ -11,10 +11,6 @@ type loginResponse = {
     username?: string,
     jwtToken?: string,
     expiresIn?: number
-}
-
-type registerResponse = {
-    message: string
 }
 
 type supportedLanguages = {
@@ -44,10 +40,6 @@ type languageInfoResponse = {
 type extendedLanguageResponse = {
     id: string,
     language: string,
-}
-
-type onlyJwtTokenInJson = {
-    jwtToken: string
 }
 
 type usersList = Array<{
@@ -105,7 +97,7 @@ type multipleUsersArray = Array<{ id: number, username: string, rankId: rolesEnu
 export { stringsList, stringInformation, translation }
 
 //login and registration component with users service
-export { loginResponse, registerResponse, usernameExists, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, onlyJwtTokenInJson, usersList, extendedLanguageResponse, fullUserInformation }
+export { loginResponse, usernameTaken, emailTaken, supportedLanguages, authenticateResponse, jwtToken, languageInfoResponse, usersList, extendedLanguageResponse, fullUserInformation }
 
 //different
 export { multipleUsersArray }

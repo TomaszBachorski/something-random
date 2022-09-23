@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { emailTaken, loginResponse, registerResponse, supportedLanguages, usernameExists, authenticateResponse, jwtToken, onlyJwtTokenInJson, fullUserInformation } from '../customTypes';
+import { emailTaken, loginResponse, supportedLanguages, authenticateResponse, fullUserInformation, usernameTaken } from '../customTypes';
 import { LoginUser, RegisterUser } from '../user';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +20,7 @@ export class AuthService {
     ) { }
 
     userExists(username: string) {
-        return this.http.post<usernameExists>("http://localhost:7200/userExists/", { username: username });
+        return this.http.post<usernameTaken>("http://localhost:7200/userExists/", { username: username });
     }
 
     emailTaken(email: string) {
@@ -28,7 +28,7 @@ export class AuthService {
     }
 
     register(user: RegisterUser) {
-        return this.http.post<registerResponse>("http://localhost:7200/register", user);
+        return this.http.post<{message: string}>("http://localhost:7200/register", user);
     }
 
     private setSession(authResult: loginResponse) {
@@ -76,7 +76,7 @@ export class AuthService {
     }
 
     refreshUserInformation(jwtToken: string, expiresAt: string) {
-        return this.http.post<onlyJwtTokenInJson>("http://localhost:7200/refreshUserInformation", {jwtToken: jwtToken, expiresAt: expiresAt});
+        return this.http.post<{jwtBearerToken: string}>("http://localhost:7200/refreshUserInformation", {jwtToken: jwtToken, expiresAt: expiresAt});
     }
 
     getFullUserInformation(username: string) {

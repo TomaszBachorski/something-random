@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { AbstractControlWarn } from "./components/register/register.component";
-import { emailTaken, supportedLanguages, usernameExists } from "./customTypes";
+import { emailTaken, supportedLanguages, usernameTaken} from "./customTypes";
 import { AuthService } from "./services/auth-service.service";
 
 function fixLanguageInput(languages: string[]): string[] {
@@ -71,9 +71,9 @@ let passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationEr
 
 function usernameAlreadyExists(userService: AuthService): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        userService.userExists(control.value).subscribe((res: usernameExists) => {
-            if (Object.values(res)[0] == true) control.setErrors({ usernameExist: true });
-        })
+        userService.userExists(control.value).subscribe((res: usernameTaken) => {
+            if (res.taken === true) control.setErrors({ usernameExist: true });
+        });
         return null;
     }
 }
@@ -81,8 +81,8 @@ function usernameAlreadyExists(userService: AuthService): ValidatorFn {
 function emailAlreadyExists(userService: AuthService): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         userService.emailTaken(control.value).subscribe((res: emailTaken) => {
-            if (Object.values(res)[0] == true) control.setErrors({ emailTaken: true });
-        })
+            if (res.taken === true) control.setErrors({ emailTaken: true });
+        });
         return null;
     }
 }

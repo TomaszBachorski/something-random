@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { HttpClient } from "@angular/common/http";
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { RegisterUser } from "../../user";
 import { emailAlreadyExists, englishAsNative, maxNumberOfLanguages, minimumAge, passwordMatchValidator, supportedLanguages, unexpectedInput, usernameAlreadyExists } from 'src/app/customValidators';
-import { registerResponse } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { TitleService } from 'src/app/services/title-service.service';
 
@@ -66,8 +63,8 @@ export class RegisterComponent implements OnInit {
             this.registrationForm.value.email,
             this.registrationForm.value.password
         );
-        this.authService.register(this.user).subscribe((res:registerResponse) => {
-            if (Object.values(res)[0]!=="Success") return;
+        this.authService.register(this.user).subscribe((res:{message: string}) => {
+            if (res.message==="Success") return;
             this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
         }, (error) => { console.log(error) });
         return;
