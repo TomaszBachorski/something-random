@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { jwtToken, stringInformation } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { TitleService } from 'src/app/services/title-service.service';
 import jwt_decode from "jwt-decode";
-import { StringsService } from 'src/app/services/strings-service.service';
 
 @Component({
     selector: 'app-translate-language',
@@ -32,7 +31,7 @@ export class TranslateLanguageComponent implements OnInit {
             this.localStorage.removeAll();
             return;
         }
-        let jwtToken: string = this.localStorage.get("jwtToken")!;
+        const jwtToken: string = this.localStorage.get("jwtToken")!;
         this.authService.authenticate(jwtToken);
 
         this.authService.refreshUserInformation(jwtToken, this.localStorage.get("expiresAt")!).subscribe((res: {jwtBearerToken: string}) => {

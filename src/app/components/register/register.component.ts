@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
         private router: Router,
         private authService: AuthService,
         private titleService: TitleService
-    ) { };
+    ) { }
 
     ngOnInit(): void {
         this.registrationForm.setValidators(passwordMatchValidator);
@@ -64,13 +64,10 @@ export class RegisterComponent implements OnInit {
             this.registrationForm.value.password
         );
         this.authService.register(this.user).subscribe((res:{message: string}) => {
-            if (res.message==="Success") return;
-            this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
+            if (res.message==="Success") return this.router.navigate(['/signin'], { queryParams: {message: "Success"} });
+            return;
         }, (error) => { console.log(error) });
         return;
-    }
-    log() {
-        console.log(this.registrationForm)
     }
 }
 

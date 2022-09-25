@@ -15,7 +15,7 @@ function englishAsNative(): ValidatorFn {
         const languages: string = control.value;
         if (!languages) return null;
         // let fixed = fixLanguageInput(languages);
-        let valid: boolean = languages.toUpperCase().includes("EN");
+        const valid: boolean = languages.toUpperCase().includes("EN");
         return valid ? null : { englishAsNative: false };
     }
 }
@@ -33,8 +33,8 @@ function supportedLanguages(userService: AuthService): any {
     return (control: AbstractControlWarn): ValidationErrors | null => {
         userService.getSupportedLanguages().subscribe((res: supportedLanguages) => {
             if (!control.value) return null;
-            let languagesInput: string[] = fixLanguageInput(control.value.toUpperCase().split(","));
-            let unsupportedLanguages = new Array();
+            const languagesInput: string[] = fixLanguageInput(control.value.toUpperCase().split(","));
+            const unsupportedLanguages = [];
             for (let i = 0; i < languagesInput.length; i++) {
                 if (!res.languages.includes(languagesInput[i])) unsupportedLanguages.push(languagesInput[i]);
             }
@@ -56,14 +56,14 @@ function minimumAge(): ValidatorFn {
         const birthdate: Date = new Date(control.value);
         const today: Date = new Date();
         if (!birthdate) return null;
-        let valid: boolean = (today.getFullYear() - birthdate.getFullYear() < 16) ? false : true;
+        const valid: boolean = (today.getFullYear() - birthdate.getFullYear() < 16) ? false : true;
         return valid ? null : { minimumAge: false };
     }
 }
 
-let passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
-    let pass: string = group.get('password')!.value;
-    let confirmPass: string = group.get('repeatPassword')!.value;
+const passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const pass: string = group.get('password')!.value;
+    const confirmPass: string = group.get('repeatPassword')!.value;
     if (pass !== confirmPass) group.get('repeatPassword')!.setErrors({ notSame: true });
     else group.get('repeatPassword')!.setErrors(null);
     return null;

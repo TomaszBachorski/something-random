@@ -42,14 +42,14 @@ export class TranslateFieldComponent implements OnInit {
         translation: new FormControl(null, [Validators.required])
     });
 
-    get translation(): FormControl { return <FormControl>this.translationSubmit.get("translation") };
+    get translation(): FormControl { return <FormControl>this.translationSubmit.get("translation") }
 
     submit() {
         if (this.buttonUsed === "next" || this.buttonUsed === "previous") {
-            let currentCheckboxes = { pending: this.localStorageService.get("pending"), approved: this.localStorageService.get("approved"), translated: this.localStorageService.get("translated") };
+            const currentCheckboxes = { pending: this.localStorageService.get("pending"), approved: this.localStorageService.get("approved"), translated: this.localStorageService.get("translated") };
             this.stringsService.getStrings(this.language).subscribe((res: stringsList) => {
                 res = res.filter(str => { return currentCheckboxes[str.status] === "true" });
-                let stringKeys: string[] = res.map(obj => obj.stringKey);
+                const stringKeys: string[] = res.map(obj => obj.stringKey);
                 let index: number = stringKeys.findIndex(o => o === this.stringInformation!.stringKey);
                 if (index === 0 && this.buttonUsed === "previous") return alert("There are no more previous strings");
                 if (index === stringKeys.length - 1 && this.buttonUsed === "next") return alert("You can't go any further, cause there is nothing behind");
@@ -62,7 +62,7 @@ export class TranslateFieldComponent implements OnInit {
             return;
         }
         if (this.buttonUsed === "delete") {
-            let answer = confirm("Are you sure, that you want to delete your own translation? This action cannot be undone.");
+            const answer = confirm("Are you sure, that you want to delete your own translation? This action cannot be undone.");
             if (answer === false) return;
             console.log(answer)
 

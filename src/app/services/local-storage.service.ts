@@ -20,7 +20,7 @@ export class LocalStorageService {
     }
 
     removeAll() {
-        for (let key in localStorage) {
+        for (const key in localStorage) {
             delete localStorage[key];
         }
     }

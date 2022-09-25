@@ -14,7 +14,7 @@ import { TitleService } from 'src/app/services/title-service.service';
 })
 export class TranslationPanelComponent implements OnInit {
     public userLanguages!: string[];
-    public availableUserLanguages: string[] = new Array();
+    public availableUserLanguages: string[] = [];
 
     constructor(
         private authService: AuthService,
@@ -31,12 +31,12 @@ export class TranslationPanelComponent implements OnInit {
             return;
         }
         this.titleService.setTitle("Translate");
-        let token: string | null = this.localStorage.get("jwtToken")
+        const token: string | null = this.localStorage.get("jwtToken")
         if (!token) return;
         this.authService.authenticate(token); //Further away token is valid!
         this.authService.refreshUserInformation(token, this.localStorage.get("expiresAt")!).subscribe((res: {jwtBearerToken: string}) => {
             this.localStorage.set("jwtToken", res.jwtBearerToken);
-            let decodedToken: jwtToken = jwt_decode(token!);
+            const decodedToken: jwtToken = jwt_decode(token!);
             this.userLanguages = decodedToken.languages;
             this.translateService.getSupportedLanguages().subscribe((res: supportedLanguages) => {
                 //Checking which languages are available => not every language is supported

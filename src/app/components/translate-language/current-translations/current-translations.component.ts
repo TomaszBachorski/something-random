@@ -32,13 +32,13 @@ export class CurrentTranslationsComponent implements OnInit {
             this.stringsService.getString(this.stringKey, this.language).subscribe((stringInformation: stringInformation) => {
                 this.stringInformation = stringInformation;
                 if (!this.stringInformation.availableTranslations) return;
-                let uids: number[] = this.stringInformation.availableTranslations.map(u => u.userId);
+                const uids: number[] = this.stringInformation.availableTranslations.map(u => u.userId);
                 this.userService.getMultipleUsers(uids).subscribe((res: multipleUsersArray) => {
                     this.displayData = [];
                     this.participatingUsers = res;
                     if (!this.stringInformation.availableTranslations) return;
                     for (let i = 0; i < this.stringInformation.availableTranslations.length; i++) {
-                        let user = this.stringInformation.availableTranslations[i];
+                        const user = this.stringInformation.availableTranslations[i];
                         this.displayData.push({
                             id: user.userId,
                             translation: user.translation,

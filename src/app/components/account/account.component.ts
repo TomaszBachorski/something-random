@@ -6,7 +6,7 @@ import { fullUserInformation, jwtToken, rolesEnum } from 'src/app/customTypes';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { Router } from '@angular/router';
 import { TitleService } from 'src/app/services/title-service.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { FormControlWarn } from '../register/register.component';
 import { englishAsNative, maxNumberOfLanguages, supportedLanguages, unexpectedInput } from 'src/app/customValidators';
 
@@ -33,10 +33,10 @@ export class AccountComponent implements OnInit {
             this.localStorage.removeAll();
             return;
         }
-        let jwtToken: string = this.localStorage.get("jwtToken")!
+        const jwtToken: string = this.localStorage.get("jwtToken")!
         this.authService.authenticate(jwtToken);
         // get user information
-        let tempUser:jwtToken = jwt_decode(jwtToken);
+        const tempUser:jwtToken = jwt_decode(jwtToken);
         this.authService.getFullUserInformation(tempUser.username).subscribe((res:fullUserInformation)=>{
             this.user = res;
             //set current languages in FormControl
