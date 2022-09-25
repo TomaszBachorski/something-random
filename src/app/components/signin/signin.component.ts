@@ -51,7 +51,7 @@ export class SigninComponent implements OnInit {
 
     validate() {
         if (!this.loginForm.valid) return;
-        let user = new LoginUser(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
+        const user = new LoginUser(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
         this.authService.login(user);
     }
 }

@@ -36,7 +36,7 @@ export class TranslateLanguageComponent implements OnInit {
 
         this.authService.refreshUserInformation(jwtToken, this.localStorage.get("expiresAt")!).subscribe((res: {jwtBearerToken: string}) => {
             this.localStorage.set("jwtToken", res.jwtBearerToken);
-            let decodedToken: jwtToken = jwt_decode(jwtToken);
+            const decodedToken: jwtToken = jwt_decode(jwtToken);
             if (!decodedToken.languages.includes(this.language)) this.router.navigate(["/translate"]);
             this.user = decodedToken;
         });
